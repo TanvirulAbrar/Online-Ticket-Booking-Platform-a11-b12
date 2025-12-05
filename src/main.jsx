@@ -1,20 +1,11 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { RouterProvider } from "react-router/dom";
 import "./index.css";
 import App from "./App.jsx";
-import { createBrowserRouter } from "react-router";
-import { RouterProvider } from "react-router/dom";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <div className="navbar bg-base-100 shadow-sm">
-        <a className="btn btn-ghost text-xl">daisyUI</a>
-      </div>
-    ),
-  },
-]);
+import { router } from "./routes/router.jsx";
+import AuthProvider from "./contexts/AuthContext/AuthProvider.jsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
