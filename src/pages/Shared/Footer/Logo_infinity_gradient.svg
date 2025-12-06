@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Infinity geometric logo with gradient">
+  <defs>
+    <linearGradient id="grad1" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="50%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#10B981"/>
+    </linearGradient>
+    <linearGradient id="grad2" x1="1" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#FB7185"/>
+      <stop offset="50%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#EF4444"/>
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- background circle faint -->
+  <rect width="100%" height="100%" rx="160" fill="transparent"/>
+
+  <!-- left loop -->
+  <g filter="url(#shadow)">
+    <path d="M280 512c0-102 82-184 184-184 44 0 85 15 117 40 32-25 73-40 117-40 102 0 184 82 184 184s-82 184-184 184c-44 0-85-15-117-40-32 25-73 40-117 40-102 0-184-82-184-184z"
+          fill="url(#grad1)" opacity="0.95" transform="translate(-40 -40) rotate(-10 512 512)" />
+  </g>
+
+  <!-- right loop (overlay with different gradient and cutout to form infinity) -->
+  <g filter="url(#shadow)">
+    <path d="M744 512c0-102-82-184-184-184-44 0-85 15-117 40-32-25-73-40-117-40-102 0-184 82-184 184s82 184 184 184c44 0 85-15 117-40 32 25 73 40 117 40 102 0 184-82 184-184z"
+          fill="url(#grad2)" opacity="0.95" transform="translate(40 40) rotate(10 512 512)" />
+  </g>
+
+  <!-- center negative space to create crisp intersection (creates the 'twist' of infinity) -->
+  <path d="M512 360c40 0 78 14 108 38l-60 48c-19-14-43-22-68-22-44 0-82 25-100 61-6-14-10-30-10-46 0-64 52-116 116-116z"
+        fill="white" opacity="0.95"/>
+
+  <!-- thin stroke outlines to emphasize geometry -->
+  <path d="M280 512c0-102 82-184 184-184 44 0 85 15 117 40 32-25 73-40 117-40 102 0 184 82 184 184s-82 184-184 184c-44 0-85-15-117-40-32 25-73 40-117 40-102 0-184-82-184-184z"
+        fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="6" transform="translate(-40 -40) rotate(-10 512 512)"/>
+
+  <path d="M744 512c0-102-82-184-184-184-44 0-85 15-117 40-32-25-73-40-117-40-102 0-184 82-184 184s82 184 184 184c44 0 85-15 117-40 32 25 73 40 117 40 102 0 184-82 184-184z"
+        fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="6" transform="translate(40 40) rotate(10 512 512)"/>
+
+</svg>
