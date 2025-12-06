@@ -12,6 +12,8 @@ import tap from "./tap.svg";
 import upay from "./upay.svg";
 import visaCard from "./visaCard.svg";
 import Stripe from "./stripe.png";
+import logo from "./logo.png";
+import { NavLink } from "react-router";
 
 const Footer = () => {
   const textcolor = "text-[#646464]";
@@ -33,7 +35,9 @@ const Footer = () => {
     <footer className="bg-white text-[#1A2B48] pt-12 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-10">
         <div>
-          <img src="/logo.png" alt="Logo" className="w-32 mb-4" />
+          <NavLink to={"/"}>
+            <img src={logo} alt="Logo" className="w-20 mb-4" />
+          </NavLink>
           <p className="text-gray-600 text-sm leading-6">
             Book bus, train, launch & flight tickets easily.
           </p>
@@ -87,20 +91,23 @@ const Footer = () => {
             Payment Methods
           </h3>
           <div className="flex flex-wrap items-center gap-2">
+            <div className="h-8  content-center font-semibold rounded-[6px] border-1 border-[#e2e2e2] overflow-hidden px-2 w-fit text-white">
+              <img src={Stripe} className="h-8 w-fit" alt="" />
+            </div>
+            <div className="h-8  content-center font-semibold rounded-[6px] border-1 border-[#e2e2e2] overflow-hidden px-2 w-fit text-white">
+              <img src={logo} className="h-8 w-fit" alt="" />
+            </div>
             {payments.map((log, i) => {
               console.log(i);
               return <img key={i} src={log} alt="" className="h-8" />;
             })}
-            <div className="h-8  content-center font-semibold rounded-[6px] border-1 border-[#e2e2e2] overflow-hidden px-2 w-fit text-white">
-              <img src={Stripe} className="h-8 w-fit" alt="" />
-            </div>
           </div>
         </div>
       </div>
 
       <div className="mt-10 border-t border-gray-200 py-4">
         <p className="text-center text-gray-500 text-sm">
-          © 2025 TicketBari. All rights reserved.
+          © 2025 . All rights reserved.
         </p>
       </div>
     </footer>
