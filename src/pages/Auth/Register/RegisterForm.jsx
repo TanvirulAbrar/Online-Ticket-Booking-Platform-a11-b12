@@ -1,0 +1,73 @@
+import { Mail, Lock, Eye, EyeOff, Apple, Chrome } from "lucide-react";
+
+export default function RegisterForm() {
+  return (
+    <form className="w-full max-w-md mx-auto p-8 bg-white rounded-2xl shadow-md flex flex-col gap-4">
+      {/* Email */}
+      <div className="flex flex-col gap-1">
+        <label className="font-semibold text-gray-800">Email</label>
+        <div className="flex items-center h-12 border border-gray-300 rounded-xl px-3 focus-within:border-blue-500 transition">
+          <Mail size={20} className="text-gray-500" />
+          <input
+            type="email"
+            placeholder="Enter your Email"
+            className="w-full h-full ml-3 outline-none bg-transparent"
+          />
+        </div>
+      </div>
+
+      {/* Password */}
+      <div className="flex flex-col gap-1">
+        <label className="font-semibold text-gray-800">Password</label>
+        <div className="flex items-center h-12 border border-gray-300 rounded-xl px-3 focus-within:border-blue-500 transition">
+          <Lock size={20} className="text-gray-500" />
+          <input
+            type="password"
+            placeholder="Enter your Password"
+            className="w-full ml-3 outline-none bg-transparent"
+          />
+          <Eye className="text-gray-500" size={20} />
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <label className="flex items-center gap-2 text-sm">
+          <input type="checkbox" className="checkbox checkbox-sm" />
+          Remember me
+        </label>
+
+        <button type="button" className="text-blue-600 text-sm font-medium">
+          Forgot password?
+        </button>
+      </div>
+
+      {/* Sign in button */}
+      <button className="btn w-full h-12 bg-black text-white rounded-xl hover:bg-neutral-800">
+        Sign In
+      </button>
+
+      {/* Signup */}
+      <p className="text-center text-sm">
+        Don't have an account?{" "}
+        <span className="text-blue-600 font-medium cursor-pointer">
+          Sign Up
+        </span>
+      </p>
+
+      <p className="text-center text-sm text-gray-500 my-1">Or With</p>
+
+      {/* Social Buttons */}
+      <div className="flex items-center gap-3 w-full">
+        <button className="btn w-1/2 h-12 rounded-xl border border-gray-300 hover:border-blue-500 bg-white flex items-center justify-center gap-2">
+          <Chrome size={20} />
+          Google
+        </button>
+
+        <button className="btn w-1/2 h-12 rounded-xl border border-gray-300 hover:border-blue-500 bg-white flex items-center justify-center gap-2">
+          <Apple size={20} />
+          Apple
+        </button>
+      </div>
+    </form>
+  );
+}
