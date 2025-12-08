@@ -98,7 +98,6 @@ const Footer = () => {
               <img src={logo} className="h-8 w-fit" alt="" />
             </div>
             {payments.map((log, i) => {
-              console.log(i);
               return <img key={i} src={log} alt="" className="h-8" />;
             })}
           </div>
