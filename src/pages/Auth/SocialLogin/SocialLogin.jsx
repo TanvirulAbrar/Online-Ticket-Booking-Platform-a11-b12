@@ -2,6 +2,7 @@ import React from "react";
 import useAuth from "../../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { toast } from "react-toastify";
 
 const SocialLogin = () => {
   const { signInGoogle } = useAuth();
@@ -9,7 +10,8 @@ const SocialLogin = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleGoogleSignIn = () => {
+  const handleGoogleSignIn = (event) => {
+    event.preventDefault();
     signInGoogle()
       .then((result) => {
         console.log(result.user);
@@ -22,6 +24,7 @@ const SocialLogin = () => {
         };
 
         axiosSecure.post("/users", userInfo).then((res) => {
+          toast("login successful");
           console.log("user data has been stored", res.data);
           navigate(location.state || "/");
         });
@@ -33,7 +36,6 @@ const SocialLogin = () => {
 
   return (
     <div className="text-center pb-8">
-      <p className="mb-2">OR</p>
       <button
         onClick={handleGoogleSignIn}
         className="btn bg-white text-black border-[#e5e5e5]"

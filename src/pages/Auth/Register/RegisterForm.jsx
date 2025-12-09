@@ -5,6 +5,8 @@ import useAuth from "../../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import axios from "axios";
+import SocialLogin from "../SocialLogin/SocialLogin";
+import { toast } from "react-toastify";
 
 export default function RegisterForm() {
   const {
@@ -20,7 +22,8 @@ export default function RegisterForm() {
   const handelEye = () => {
     setisEye(!isEye);
   };
-  const handleRegistration = (data) => {
+  const handleRegistration = (data, event) => {
+    event.preventDefault();
     const profileImg = data.photo[0];
 
     registerUser(data.email, data.password)
@@ -57,14 +60,19 @@ export default function RegisterForm() {
 
           updateUserProfile(userProfile)
             .then(() => {
+              toast("login successful");
               // console.log('user profile updated done.')
               navigate(location.state || "/");
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+              console.log(error);
+              toast.error("" + error);
+            });
         });
       })
       .catch((error) => {
         console.log(error);
+        toast.error("" + error);
       });
   };
   return (
@@ -173,7 +181,7 @@ export default function RegisterForm() {
 
         {/* Signup */}
         <p className="text-center text-sm">
-          Don't have an account?{" "}
+          have an account?{" "}
           <NavLink to={"/login"}>
             <span className="text-blue-600 font-medium cursor-pointer">
               Login
@@ -184,7 +192,7 @@ export default function RegisterForm() {
         <p className="text-center text-sm text-gray-500 my-1">Or With</p>
 
         {/* Social Buttons */}
-        <div className="flex items-center gap-3 w-full">
+        {/* <div className="flex items-center gap-3 w-full">
           <button className="btn w-1/2 h-12 rounded-xl border border-gray-300 hover:border-blue-500 bg-white flex items-center justify-center gap-2">
             <Chrome size={20} />
             Google
@@ -194,7 +202,8 @@ export default function RegisterForm() {
             <Apple size={20} />
             Apple
           </button>
-        </div>
+        </div> */}
+        <SocialLogin></SocialLogin>
       </form>
     </div>
   );

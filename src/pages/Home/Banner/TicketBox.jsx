@@ -5,12 +5,12 @@ const TicketBox = () => {
     {
       tag: "DAC",
       title: "Dhaka",
-      detail: " Bangladesh, Hazrat Shahjalal International Airport (DAC)",
+      detail: " Bangladesh, HSIA ",
     },
     {
       tag: "CXB",
       title: "Cox's Bazar",
-      detail: "  Bangladesh, Cox's Bazar Airport (CXB)",
+      detail: "  Bangladesh, CBA",
     },
     {
       tag: "09",
@@ -30,7 +30,7 @@ const TicketBox = () => {
           <div
             key={i + "b"}
             className="flex max-w-50 max-h-15
-             overflow-x-scroll px-4 py-2 border border-[#cfcfcf] rounded-xl w-1/4"
+             overflow-hidden px-4 py-2 border border-[#cfcfcf] rounded-xl w-1/4"
           >
             <span className=" self-center font-bold">{item.tag}</span>
             <div className="w-[1px] mx-1 bg-[#cbcbcb]"></div>
