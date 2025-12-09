@@ -6,6 +6,7 @@ import { Eraser } from "lucide-react";
 import ErrorPage from "../pages/Shared/404/ErrorPage";
 import Loading from "../pages/Shared/Loading/Loading";
 import Home from "../pages/Home/Home/Home";
+import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         Component: Register,
+      },
+      {
+        path: "/dashboard",
+        Component: DashboardHome,
       },
     ],
   },

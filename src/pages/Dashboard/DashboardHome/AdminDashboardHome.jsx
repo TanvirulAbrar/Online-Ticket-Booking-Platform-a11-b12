@@ -2,13 +2,22 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Legend, Pie, PieChart, Tooltip } from "recharts";
+import { ShieldUser, Tickets, Users, Megaphone } from "lucide-react";
+import { NavLink } from "react-router";
 
 const AdminDashboardHome = () => {
+  const navicon = [ShieldUser, Tickets, Users, Megaphone];
+  const navtext = [
+    " Profile",
+    "Manage Ticket",
+    "Manage Users",
+    "Advertise Tickets",
+  ];
   const axiosSecure = useAxiosSecure();
   const { data: ticketStats = [] } = useQuery({
     queryKey: ["status-stats"],
     queryFn: async () => {
-      const res = await axiosSecure.get("");
+      const res = await axiosSecure.get("/tickets");
       return res.data;
     },
   });
@@ -22,7 +31,20 @@ const AdminDashboardHome = () => {
   return (
     <div>
       <h2 className="text-4xl">Admin Dashing</h2>
-
+      <div className="flex flex-col">
+        {navicon.map((Icon, i) => {
+          return (
+            <NavLink
+              to={"/"}
+              key={"a" + i}
+              className="bg-blue-100 flex px-5 p-5"
+            >
+              <Icon />
+              <span className="px-5 max-md:hidden">{navtext[i]}</span>
+            </NavLink>
+          );
+        })}
+      </div>
       <div className="stats shadow">
         {ticketStats.map((stat) => (
           <div key={stat._id} className="stat">

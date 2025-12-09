@@ -20,7 +20,7 @@ const NavBar = () => {
         <NavLink to="">f</NavLink>
       </li>
       <li>
-        <NavLink to="/send-parcel">a</NavLink>
+        <NavLink to="/dashboard">dashboard</NavLink>
       </li>
       <li>
         <NavLink to="/rider">b</NavLink>
