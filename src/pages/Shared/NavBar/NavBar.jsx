@@ -17,22 +17,18 @@ const NavBar = () => {
   const links = (
     <>
       <li>
-        <NavLink to="">f</NavLink>
+        <NavLink to="/"> Home</NavLink>
       </li>
       <li>
-        <NavLink to="/dashboard">dashboard</NavLink>
+        <NavLink to="/alltickets">All Tickets</NavLink>
       </li>
+
       <li>
-        <NavLink to="/rider">b</NavLink>
+        <NavLink to="/dashboard">Dashboard</NavLink>
       </li>
-      <li>
-        <NavLink to="/coverage">c</NavLink>
-      </li>
+
       {user && (
         <>
-          <li>
-            <NavLink to="/dashboard/a">da</NavLink>
-          </li>
           <li>
             <NavLink to="/dashboard">Dashboard</NavLink>
           </li>

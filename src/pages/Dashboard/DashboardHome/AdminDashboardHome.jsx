@@ -8,7 +8,7 @@ import { NavLink } from "react-router";
 const AdminDashboardHome = () => {
   const navicon = [ShieldUser, Tickets, Users, Megaphone];
   const navtext = [
-    " Profile",
+    "Profile",
     "Manage Ticket",
     "Manage Users",
     "Advertise Tickets",

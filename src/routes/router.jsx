@@ -8,6 +8,9 @@ import Loading from "../pages/Shared/Loading/Loading";
 import Home from "../pages/Home/Home/Home";
 import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
 
+import AlTicket from "../pages/allTicket/AlTicket";
+import TicketDetail from "../pages/allTicket/Detail/TicketDetail";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -30,6 +33,14 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard",
         Component: DashboardHome,
+      },
+      {
+        path: "/alltickets",
+        Component: AlTicket,
+      },
+      {
+        path: "/details/:id",
+        Component: TicketDetail,
       },
     ],
   },
