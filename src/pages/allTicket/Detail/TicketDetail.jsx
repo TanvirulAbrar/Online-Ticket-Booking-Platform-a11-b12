@@ -18,16 +18,29 @@ import {
   Tag,
   ShieldCheck,
   PackageCheck,
+  DollarSign,
 } from "lucide-react";
 import Loading from "../../Shared/Loading/Loading";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
 
 const TicketDetail = () => {
   const { id } = useParams();
-
+  const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const { data: ticket = {} } = useQuery({
+  const [isbooked, setisbooked] = useState(false);
+  const [bookedQuantity, setbookedQuantity] = useState(0);
+
+  const handelQuntity = (event) => {
+    event.preventDefault();
+    setbookedQuantity(event.target.value);
+  };
+  const {
+    isLoading,
+    data: ticket = {},
+    refetch,
+  } = useQuery({
     queryKey: ["ticket", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/tickets/${id}`);
@@ -35,6 +48,19 @@ const TicketDetail = () => {
       return res.data;
     },
   });
+  const {
+    title,
+    quantity,
+    image,
+    from,
+    to,
+    price,
+    perks,
+    departure,
+    transportType,
+    booked,
+    state,
+  } = ticket;
   const [countdown, setCountdown] = useState("");
 
   useEffect(() => {
@@ -64,26 +90,81 @@ const TicketDetail = () => {
 
     return () => clearInterval(interval);
   }, [ticket]);
+  useEffect(() => {
+    if (user && ticket?.booked) {
+      const isAlreadyBooked = booked.find((a) => a.email == user.email);
+      isAlreadyBooked && setbookedQuantity(isAlreadyBooked.num);
+      isAlreadyBooked && setisbooked(true);
+    }
+  }, [user, ticket]);
 
+  if (isLoading) return <Loading />;
   if (!ticket) return <Loading />;
-
-  const {
-    title,
-    quantity,
-    image,
-    from,
-    to,
-    price,
-    perks,
-    departure,
-    transportType,
-  } = ticket;
 
   const transportIcon = {
     bus: <Bus className="w-4 h-4 text-blue-600" />,
     train: <Train className="w-4 h-4 text-blue-600" />,
     plane: <Plane className="w-4 h-4 text-blue-600" />,
     ship: <Ship className="w-4 h-4 text-blue-600" />,
+  };
+
+  const handelBook = (event) => {
+    event.preventDefault();
+    if (ticket.quantity <= 0 && !isbooked) {
+      return;
+    }
+    if (bookedQuantity <= 0 && !isbooked) {
+      return toast.error("quantity cannot be 0 or less. or more ");
+    }
+    if (bookedQuantity > ticket.quantity && !isbooked) {
+      return toast.error("quantity cannot be 0 or less. or more ");
+    }
+    console.log(user);
+    let quantity = ticket.quantity;
+    let booked = [];
+    let data = { email: user.email, num: Number(bookedQuantity) };
+    let newstate = "";
+    if (!isbooked) {
+      booked = [...ticket.booked, data];
+      quantity -= Number(bookedQuantity);
+      newstate = "pending";
+    } else if (state === "pending") {
+      booked = ticket.booked.filter((a) => a.email !== user.email);
+      quantity += Number(bookedQuantity);
+    }
+    const newTicket = {
+      title: ticket.title,
+      from: ticket.from,
+      to: ticket.to,
+      transportType: ticket.transportType,
+      price: ticket.price,
+      quantity: quantity,
+      departure: ticket.departure,
+      perks: ticket.perks,
+      image: ticket.image,
+      booked: booked,
+      state: newstate,
+    };
+
+    axiosSecure
+      .patch(`/tickets/${ticket._id}`, newTicket)
+      .then((res) => {
+        const data = res.data;
+        console.log("add c", data);
+        console.log("Submitted Data:", newTicket);
+
+        if (isbooked) {
+          toast("canceled successfully");
+          setisbooked(false);
+        } else {
+          toast.success(" booked successfully!");
+        }
+        refetch();
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Server error — please try again later!");
+      });
   };
 
   return (
@@ -205,10 +286,53 @@ const TicketDetail = () => {
                 </li>
               </ul>
             </div>
+            <div className="flex flex-col items-center gap-2 mt-3">
+              <input
+                onChange={(e) => {
+                  handelQuntity(e);
+                }}
+                type="text"
+                value={bookedQuantity}
+                placeholder="Enter quantity"
+                className={`flex-1 text-sm border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-violet-400 ${
+                  isbooked && "hidden"
+                }`}
+              />
+              <div className="bg-gray-50 p-3 flex items-center rounded-xl ">
+                <DollarSign className="w-4 h-4 mx-1  text-blue-500" />{" "}
+                {bookedQuantity * price}
+              </div>
 
-            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2">
-              Book Now <ChevronRightCircle className="w-5 h-5" />
-            </button>
+              {countdown === "Departed" ? (
+                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2">
+                  Departed <ChevronRightCircle className="w-5 h-5" />
+                </button>
+              ) : (
+                <button
+                  onClick={(e) => handelBook(e)}
+                  className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 ${
+                    state === "approved" && "hidden"
+                  }`}
+                >
+                  {isbooked ? "cancel book" : "Book Now"}
+                  <ChevronRightCircle className="w-5 h-5" />
+                </button>
+              )}
+              {state == "approved" && (
+                <button
+                  onClick={() => toast(" add fun s")}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+                >
+                  Pay
+                  <ChevronRightCircle className="w-5 h-5" />
+                </button>
+              )}
+              {state != "" && (
+                <div className="bg-gray-50 p-3 flex items-center rounded-xl mb-4">
+                  <Tag className="w-4 h-4 mx-1  text-blue-500" /> {state}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

@@ -10,6 +10,7 @@ import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
 
 import AlTicket from "../pages/allTicket/AlTicket";
 import TicketDetail from "../pages/allTicket/Detail/TicketDetail";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -32,7 +33,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        Component: DashboardHome,
+        element: (
+          <PrivateRoute>
+            <DashboardHome />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/alltickets",
@@ -40,7 +45,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
-        Component: TicketDetail,
+        element: (
+          <PrivateRoute>
+            <TicketDetail />
+          </PrivateRoute>
+        ),
       },
     ],
   },

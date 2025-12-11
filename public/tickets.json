@@ -8,7 +8,9 @@
     "quantity": 40,
     "departure": "2025-12-18T08:30",
     "perks": ["AC", "WiFi"],
-    "image": "https://i.ibb.co/b11b7qf/bus1.jpg"
+    "image": "https://i.ibb.co/b11b7qf/bus1.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Dhaka to Cox’s Bazar Premium Coach",
@@ -19,7 +21,9 @@
     "quantity": 30,
     "departure": "2025-12-20T06:45",
     "perks": ["AC", "TV", "Snacks"],
-    "image": "https://i.ibb.co/y6vj7tq/bus2.jpg"
+    "image": "https://i.ibb.co/y6vj7tq/bus2.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Chittagong to Sylhet Train Service",
@@ -30,7 +34,9 @@
     "quantity": 120,
     "departure": "2025-12-22T09:00",
     "perks": ["AC", "Sleeper"],
-    "image": "https://i.ibb.co/09Jt6Fh/train1.jpg"
+    "image": "https://i.ibb.co/09Jt6Fh/train1.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Dhaka to Rajshahi Intercity Train",
@@ -41,7 +47,9 @@
     "quantity": 200,
     "departure": "2025-12-19T07:15",
     "perks": ["AC", "Food"],
-    "image": "https://i.ibb.co/VpJYsb4/train2.jpg"
+    "image": "https://i.ibb.co/VpJYsb4/train2.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Dhaka to Barisal Launch Night Trip",
@@ -52,7 +60,9 @@
     "quantity": 100,
     "departure": "2025-12-21T22:00",
     "perks": ["Cabin", "AC"],
-    "image": "https://i.ibb.co/HKyvtGz/launch1.jpg"
+    "image": "https://i.ibb.co/HKyvtGz/launch1.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Barisal to Dhaka Luxury Launch",
@@ -63,7 +73,9 @@
     "quantity": 80,
     "departure": "2025-12-23T21:00",
     "perks": ["AC", "VIP Cabin"],
-    "image": "https://i.ibb.co/HKyvtGz/launch1.jpg"
+    "image": "https://i.ibb.co/HKyvtGz/launch1.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Dhaka to Sylhet Air Express",
@@ -74,7 +86,9 @@
     "quantity": 22,
     "departure": "2025-12-25T15:00",
     "perks": ["Meal", "Luggage"],
-    "image": "https://i.ibb.co/VScm1Sr/plane1.jpg"
+    "image": "https://i.ibb.co/VScm1Sr/plane1.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Dhaka to Jessore Air Shuttle",
@@ -85,7 +99,9 @@
     "quantity": 18,
     "departure": "2025-12-26T10:00",
     "perks": ["Luggage"],
-    "image": "https://i.ibb.co/YBdJymS/plane2.jpg"
+    "image": "https://i.ibb.co/YBdJymS/plane2.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Sylhet to Dhaka Greenline Bus",
@@ -96,7 +112,9 @@
     "quantity": 36,
     "departure": "2025-12-18T23:00",
     "perks": ["AC", "Snacks"],
-    "image": "https://i.ibb.co/b11b7qf/bus1.jpg"
+    "image": "https://i.ibb.co/b11b7qf/bus1.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Cox’s Bazar to Dhaka Night Coach",
@@ -107,7 +125,9 @@
     "quantity": 32,
     "departure": "2025-12-24T20:30",
     "perks": ["AC"],
-    "image": "https://i.ibb.co/y6vj7tq/bus2.jpg"
+    "image": "https://i.ibb.co/y6vj7tq/bus2.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Rajshahi to Dhaka Intercity Train",
@@ -118,7 +138,9 @@
     "quantity": 240,
     "departure": "2025-12-23T06:45",
     "perks": ["Food"],
-    "image": "https://i.ibb.co/09Jt6Fh/train1.jpg"
+    "image": "https://i.ibb.co/09Jt6Fh/train1.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Sylhet to Chittagong Day Train",
@@ -129,7 +151,9 @@
     "quantity": 150,
     "departure": "2025-12-27T13:30",
     "perks": ["AC"],
-    "image": "https://i.ibb.co/VpJYsb4/train2.jpg"
+    "image": "https://i.ibb.co/VpJYsb4/train2.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Dhaka to Khulna AC Bus",
@@ -140,7 +164,9 @@
     "quantity": 38,
     "departure": "2025-12-29T07:45",
     "perks": ["AC", "WiFi"],
-    "image": "https://i.ibb.co/b11b7qf/bus1.jpg"
+    "image": "https://i.ibb.co/b11b7qf/bus1.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Khulna to Dhaka Super Bus",
@@ -151,7 +177,9 @@
     "quantity": 40,
     "departure": "2025-12-30T08:00",
     "perks": ["AC"],
-    "image": "https://i.ibb.co/y6vj7tq/bus2.jpg"
+    "image": "https://i.ibb.co/y6vj7tq/bus2.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Dhaka to Rangpur Night Coach",
@@ -162,7 +190,9 @@
     "quantity": 34,
     "departure": "2025-12-22T22:30",
     "perks": ["AC", "Snacks"],
-    "image": "https://i.ibb.co/b11b7qf/bus1.jpg"
+    "image": "https://i.ibb.co/b11b7qf/bus1.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Rangpur to Dhaka Express",
@@ -173,7 +203,9 @@
     "quantity": 35,
     "departure": "2025-12-28T21:00",
     "perks": ["AC"],
-    "image": "https://i.ibb.co/y6vj7tq/bus2.jpg"
+    "image": "https://i.ibb.co/y6vj7tq/bus2.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Dhaka to Kolkata Flight",
@@ -184,7 +216,9 @@
     "quantity": 25,
     "departure": "2026-01-05T14:30",
     "perks": ["Meal", "Luggage"],
-    "image": "https://i.ibb.co/VScm1Sr/plane1.jpg"
+    "image": "https://i.ibb.co/VScm1Sr/plane1.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Chittagong to Dhaka Air Service",
@@ -195,7 +229,9 @@
     "quantity": 20,
     "departure": "2025-12-31T16:00",
     "perks": ["Luggage"],
-    "image": "https://i.ibb.co/YBdJymS/plane2.jpg"
+    "image": "https://i.ibb.co/YBdJymS/plane2.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Dhaka to Kuakata Launch",
@@ -206,7 +242,9 @@
     "quantity": 110,
     "departure": "2026-01-02T19:00",
     "perks": ["AC Cabin", "Food"],
-    "image": "https://i.ibb.co/HKyvtGz/launch1.jpg"
+    "image": "https://i.ibb.co/HKyvtGz/launch1.jpg",
+    "booked": [],
+    "state": ""
   },
   {
     "title": "Kuakata to Dhaka Luxury Launch",
@@ -217,6 +255,8 @@
     "quantity": 95,
     "departure": "2026-01-03T20:00",
     "perks": ["AC Cabin"],
-    "image": "https://i.ibb.co/HKyvtGz/launch1.jpg"
+    "image": "https://i.ibb.co/HKyvtGz/launch1.jpg",
+    "booked": [],
+    "state": ""
   }
 ]
