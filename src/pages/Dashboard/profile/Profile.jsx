@@ -1,10 +1,39 @@
 import React from "react";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { data } from "react-router";
+import { useQuery } from "@tanstack/react-query";
 
 const Profile = () => {
   const { user, loading } = useAuth();
+
+  const axiosSecure = useAxiosSecure();
   console.log(user, loading);
+  const {
+    isLoading,
+    data: ticket = {},
+    refetch,
+  } = useQuery({
+    queryKey: ["userticket", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/tickets`);
+      console.log(res.data);
+      const lodedData = res.data;
+      const filteredData = [];
+      for (const ticket of lodedData) {
+        const bookeds = ticket.booked;
+        if (bookeds) {
+          for (const booked of bookeds) {
+            if (booked.email === user.email) {
+              filteredData.post(ticket);
+            }
+          }
+        }
+      }
+      console.log(filteredData);
+      return filteredData;
+    },
+  });
   // const axiosSecure = useAxiosSecure();
   // const userdata = axiosSecure
   //   .get(`/users?email${user.email}`)
@@ -15,7 +44,9 @@ const Profile = () => {
       <div className="">
         <div className="relative w-fit">
           {" "}
-          <div className="top-[40%] left-10 translate-y-[-40%]  absolute h-30 w-30 bg-white rounded-full shadow-sm"></div>
+          <div className="top-[40%] left-10 translate-y-[-40%]  absolute h-30 w-30 flex content-center items-center bg-white rounded-full shadow-sm overflow-hidden border-3 border-white">
+            <img src={user.photoURL} alt="" />
+          </div>
         </div>
       </div>
       <div className="max-sm:mt-20">

@@ -24,7 +24,7 @@ const UserDashboardHome = () => {
       <div className="">My Booked Tickets</div>
       <div className="">Transaction History</div> */}
       <div className="flex gap-5">
-        <div className="flex flex-col w-fit">
+        <div className="flex flex-col min-md:w-[350px] ">
           {navicon.map((Icon, i) => {
             return (
               <NavLink
