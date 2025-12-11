@@ -11,6 +11,8 @@ import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
 import AlTicket from "../pages/allTicket/AlTicket";
 import TicketDetail from "../pages/allTicket/Detail/TicketDetail";
 import PrivateRoute from "./PrivateRoute";
+import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
+import Profile from "../pages/Dashboard/profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +40,20 @@ export const router = createBrowserRouter([
             <DashboardHome />
           </PrivateRoute>
         ),
+        children: [
+          {
+            path: "/dashboard/profile",
+            Component: Profile,
+          },
+          {
+            path: "/dashboard/paymentHistory",
+            Component: PaymentHistory,
+          },
+          {
+            path: "/dashboard/paymentHistory",
+            Component: PaymentHistory,
+          },
+        ],
       },
       {
         path: "/alltickets",

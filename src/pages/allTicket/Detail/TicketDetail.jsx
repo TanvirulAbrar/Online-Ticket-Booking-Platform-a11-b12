@@ -31,6 +31,8 @@ const TicketDetail = () => {
   const axiosSecure = useAxiosSecure();
   const [isbooked, setisbooked] = useState(false);
   const [bookedQuantity, setbookedQuantity] = useState(0);
+  const [state, setstate] = useState("");
+  const [modalActive, setmodalActive] = useState(false);
 
   const handelQuntity = (event) => {
     event.preventDefault();
@@ -59,7 +61,6 @@ const TicketDetail = () => {
     departure,
     transportType,
     booked,
-    state,
   } = ticket;
   const [countdown, setCountdown] = useState("");
 
@@ -95,6 +96,7 @@ const TicketDetail = () => {
       const isAlreadyBooked = booked.find((a) => a.email == user.email);
       isAlreadyBooked && setbookedQuantity(isAlreadyBooked.num);
       isAlreadyBooked && setisbooked(true);
+      isAlreadyBooked && setstate(isAlreadyBooked.state);
     }
   }, [user, ticket]);
 
@@ -122,15 +124,21 @@ const TicketDetail = () => {
     console.log(user);
     let quantity = ticket.quantity;
     let booked = [];
-    let data = { email: user.email, num: Number(bookedQuantity) };
-    let newstate = "";
+
+    let data = {
+      email: user.email,
+      num: Number(bookedQuantity),
+      state: "",
+    };
+
     if (!isbooked) {
       booked = [...ticket.booked, data];
       quantity -= Number(bookedQuantity);
-      newstate = "pending";
+      data.state = "pending";
     } else if (state === "pending") {
       booked = ticket.booked.filter((a) => a.email !== user.email);
       quantity += Number(bookedQuantity);
+      setstate("");
     }
     const newTicket = {
       title: ticket.title,
@@ -143,7 +151,7 @@ const TicketDetail = () => {
       perks: ticket.perks,
       image: ticket.image,
       booked: booked,
-      state: newstate,
+      state: ticket.state,
     };
 
     axiosSecure
@@ -166,9 +174,80 @@ const TicketDetail = () => {
         toast.error("Server error — please try again later!");
       });
   };
-
+  // 2
+  const handelPayment = (e) => {
+    e.preventDefault();
+    countdown === "Departed";
+  };
   return (
     <div className="">
+      <div
+        className={`fixed inset-0 z-20 flex items-center justify-center ${
+          !modalActive && "hidden"
+        } bg-black/10`}
+      >
+        <div className="p-10 h-fit w-fit rounded-2xl bg-white shadow-sm">
+          <div className="flex flex-col items-center gap-2 mt-3">
+            <label htmlFor="" className="text-gray-500 font-medium">
+              Quantity
+            </label>
+            <input
+              onChange={(e) => {
+                handelQuntity(e);
+              }}
+              type="text"
+              value={bookedQuantity}
+              placeholder="Enter quantity"
+              className={`flex-1 text-sm border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-violet-400 ${
+                isbooked && "hidden"
+              }`}
+            />
+            <div className="bg-gray-50 p-3 flex items-center rounded-xl ">
+              <DollarSign className="w-4 h-4 mx-1  text-blue-500" />{" "}
+              {bookedQuantity * price}
+            </div>
+
+            {countdown === "Departed" ? (
+              <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2">
+                Departed <ChevronRightCircle className="w-5 h-5" />
+              </button>
+            ) : (
+              <button
+                onClick={(e) => handelBook(e)}
+                className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 ${
+                  state === "approved" && "hidden"
+                }`}
+              >
+                {isbooked ? "cancel book" : "Book Now"}
+                <ChevronRightCircle className="w-5 h-5" />
+              </button>
+            )}
+            {state == "approved" && (
+              <button
+                onClick={(e) => handelPayment(e)}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                {countdown === "Departed" ? "Time Ended" : "pay"}
+                <ChevronRightCircle className="w-5 h-5" />
+              </button>
+            )}
+            {state != "" && (
+              <div className="bg-gray-50 p-3 flex items-center rounded-xl mb-4">
+                <Tag className="w-4 h-4 mx-1  text-blue-500" /> {state}
+              </div>
+            )}
+            <button
+              onClick={() => setmodalActive(!modalActive)}
+              className={`w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 ${
+                state === "approved" && "hidden"
+              }`}
+            >
+              cancel
+            </button>
+          </div>
+        </div>
+      </div>
+
       <div className="relative h-40 w-full  shadow-md group">
         <div
           className="absolute inset-0 bg-cover bg-center transition-transform duration-300 "
@@ -287,7 +366,7 @@ const TicketDetail = () => {
               </ul>
             </div>
             <div className="flex flex-col items-center gap-2 mt-3">
-              <input
+              {/* <input
                 onChange={(e) => {
                   handelQuntity(e);
                 }}
@@ -297,7 +376,7 @@ const TicketDetail = () => {
                 className={`flex-1 text-sm border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-violet-400 ${
                   isbooked && "hidden"
                 }`}
-              />
+              /> */}
               <div className="bg-gray-50 p-3 flex items-center rounded-xl ">
                 <DollarSign className="w-4 h-4 mx-1  text-blue-500" />{" "}
                 {bookedQuantity * price}
@@ -309,7 +388,7 @@ const TicketDetail = () => {
                 </button>
               ) : (
                 <button
-                  onClick={(e) => handelBook(e)}
+                  onClick={() => setmodalActive(!modalActive)}
                   className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 ${
                     state === "approved" && "hidden"
                   }`}
@@ -320,10 +399,10 @@ const TicketDetail = () => {
               )}
               {state == "approved" && (
                 <button
-                  onClick={() => toast(" add fun s")}
+                  onClick={(e) => handelPayment(e)}
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
                 >
-                  Pay
+                  {countdown === "Departed" ? "Time Ended" : "pay"}
                   <ChevronRightCircle className="w-5 h-5" />
                 </button>
               )}

@@ -52,9 +52,9 @@ const ApproveVendor = () => {
               <th></th>
               <th>Name</th>
               <th>Email</th>
-              <th>District</th>
-              <th>Application Status</th>
-              <th>Work Status</th>
+              <th>Ticket title</th>
+              <th>Booking Quantity</th>
+              <th>Total price </th>
               <th>Actions</th>
             </tr>
           </thead>

@@ -30,20 +30,21 @@ const Payment = () => {
     window.location.href = res.data.url;
   };
 
-  if (isLoading) {
-    return (
-      <div>
-        <span className="loading loading-infinity loading-xl"></span>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div>
+  //       <span className="loading loading-infinity loading-xl"></span>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div>
       <h2>
-        Please Pay ${ticket.cost} for : {ticket.ticketName}{" "}
+        {/* Please Pay ${ticket.cost} for : {ticket.ticketName}{" "} */}
+        Please Pay for :
       </h2>
-      <button onClick={handlePayment} className="btn btn-primary text-black">
+      <button onClick={handlePayment} className="btn bg-blue-500 text-white">
         Pay
       </button>
     </div>

@@ -5,6 +5,12 @@ import AdminDashboardHome from "./AdminDashboardHome";
 import VendorDashboardHome from "./VendorDashboardHome";
 import UserDashboardHome from "./UserDashboardHome";
 import Loading from "../../Shared/Loading/Loading";
+import ApproveVendor from "../ApproveVendor/ApproveVendor";
+import MyTicket from "../MyTicket/MyTicket";
+import Payment from "../Payment/Payment";
+import PaymentCancelled from "../Payment/PaymentCancelled";
+import PaymentSuccess from "../Payment/PaymentSuccess";
+import PaymentHistory from "../PaymentHistory/PaymentHistory";
 
 const DashboardHome = () => {
   // const { role, roleLoading } = useRole();
@@ -21,9 +27,17 @@ const DashboardHome = () => {
 
   return (
     <div className="">
-      <AdminDashboardHome></AdminDashboardHome>
-      <VendorDashboardHome></VendorDashboardHome>
+      {/* <AdminDashboardHome></AdminDashboardHome> */}
+      {/* <VendorDashboardHome></VendorDashboardHome> */}
       <UserDashboardHome></UserDashboardHome>
+      {/* <ApproveVendor></ApproveVendor>
+       */}
+      {/* <MyTicket></MyTicket>
+       */}
+      {/* <Payment></Payment> */}
+      {/* <PaymentCancelled></PaymentCancelled> */}
+      {/* <PaymentSuccess></PaymentSuccess> */}
+      {/* <PaymentHistory></PaymentHistory> */}
     </div>
   );
 };
