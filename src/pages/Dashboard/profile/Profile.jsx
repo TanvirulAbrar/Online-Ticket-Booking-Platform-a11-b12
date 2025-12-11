@@ -8,7 +8,7 @@ const Profile = () => {
   const { user, loading } = useAuth();
 
   const axiosSecure = useAxiosSecure();
-  console.log(user, loading);
+  // console.log(user, loading);
   const {
     isLoading,
     data: ticket = {},

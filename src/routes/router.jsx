@@ -13,6 +13,7 @@ import TicketDetail from "../pages/allTicket/Detail/TicketDetail";
 import PrivateRoute from "./PrivateRoute";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
 import Profile from "../pages/Dashboard/profile/Profile";
+import MyBookedTicket from "../pages/Dashboard/MyTicket/MyBookedTicket";
 
 export const router = createBrowserRouter([
   {
@@ -46,8 +47,8 @@ export const router = createBrowserRouter([
             Component: Profile,
           },
           {
-            path: "/dashboard/paymentHistory",
-            Component: PaymentHistory,
+            path: "/dashboard/my-booked-ticket",
+            Component: MyBookedTicket,
           },
           {
             path: "/dashboard/paymentHistory",

@@ -46,7 +46,18 @@ const TicketDetail = () => {
     queryKey: ["ticket", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/tickets/${id}`);
-      console.log(res.data);
+      // console.log(res.data);
+      return res.data;
+    },
+  });
+
+  const { data: bookedTicket = {}, refetchBooked } = useQuery({
+    queryKey: ["bookedticket", id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/booked-tickets?TicketId=${id}&email=${user.email}`
+      );
+      console.log("from detail", res.data);
       return res.data;
     },
   });
@@ -60,7 +71,7 @@ const TicketDetail = () => {
     perks,
     departure,
     transportType,
-    booked,
+    // booked,
   } = ticket;
   const [countdown, setCountdown] = useState("");
 
@@ -92,13 +103,13 @@ const TicketDetail = () => {
     return () => clearInterval(interval);
   }, [ticket]);
   useEffect(() => {
-    if (user && ticket?.booked) {
-      const isAlreadyBooked = booked.find((a) => a.email == user.email);
-      isAlreadyBooked && setbookedQuantity(isAlreadyBooked.num);
+    if (user && bookedTicket) {
+      const isAlreadyBooked = bookedTicket[0];
+      isAlreadyBooked && setbookedQuantity(isAlreadyBooked.quantity);
       isAlreadyBooked && setisbooked(true);
       isAlreadyBooked && setstate(isAlreadyBooked.state);
     }
-  }, [user, ticket]);
+  }, [user, bookedTicket]);
 
   if (isLoading) return <Loading />;
   if (!ticket) return <Loading />;
@@ -122,8 +133,8 @@ const TicketDetail = () => {
       return toast.error("quantity cannot be 0 or less. or more ");
     }
     console.log(user);
-    let quantity = ticket.quantity;
-    let booked = [];
+    // let quantity = ticket.quantity;
+    // let booked = [];
 
     let data = {
       email: user.email,
@@ -132,47 +143,62 @@ const TicketDetail = () => {
     };
 
     if (!isbooked) {
-      booked = [...ticket.booked, data];
-      quantity -= Number(bookedQuantity);
+      // booked = [...ticket.booked, data];
+      // quantity -= Number(bookedQuantity);
       data.state = "pending";
     } else if (state === "pending") {
-      booked = ticket.booked.filter((a) => a.email !== user.email);
-      quantity += Number(bookedQuantity);
+      // booked = ticket.booked.filter((a) => a.email !== user.email);
+      // quantity += Number(bookedQuantity);
       setstate("");
     }
-    const newTicket = {
-      title: ticket.title,
-      from: ticket.from,
-      to: ticket.to,
-      transportType: ticket.transportType,
-      price: ticket.price,
+    const newbookedTicket = {
+      TicketId: id,
+      email: user.email,
+      price: ticket.price * bookedQuantity,
       quantity: quantity,
-      departure: ticket.departure,
-      perks: ticket.perks,
-      image: ticket.image,
-      booked: booked,
-      state: ticket.state,
+      state: state,
     };
+    if (bookedTicket) {
+      axiosSecure
+        .patch(`/booked-tickets/${bookedTicket._id}`, newbookedTicket)
+        .then((res) => {
+          const data = res.data;
+          console.log("add c", data);
+          console.log("Submitted Data:", newbookedTicket);
 
-    axiosSecure
-      .patch(`/tickets/${ticket._id}`, newTicket)
-      .then((res) => {
-        const data = res.data;
-        console.log("add c", data);
-        console.log("Submitted Data:", newTicket);
+          if (isbooked) {
+            toast("canceled successfully");
+            setisbooked(false);
+          } else {
+            toast.success(" booked successfully!");
+          }
+          refetchBooked();
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error("Server error — please try again later!");
+        });
+    } else {
+      axiosSecure
+        .post(`/booked-tickets`, newbookedTicket)
+        .then((res) => {
+          const data = res.data;
+          console.log("add c", data);
+          console.log("Submitted Data:", newbookedTicket);
 
-        if (isbooked) {
-          toast("canceled successfully");
-          setisbooked(false);
-        } else {
-          toast.success(" booked successfully!");
-        }
-        refetch();
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error("Server error — please try again later!");
-      });
+          if (isbooked) {
+            toast("canceled successfully");
+            setisbooked(false);
+          } else {
+            toast.success(" booked successfully!");
+          }
+          refetchBooked();
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error("Server error — please try again later!");
+        });
+    }
   };
   // 2
   const handelPayment = (e) => {

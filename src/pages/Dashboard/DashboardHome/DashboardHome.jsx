@@ -6,7 +6,7 @@ import VendorDashboardHome from "./VendorDashboardHome";
 import UserDashboardHome from "./UserDashboardHome";
 import Loading from "../../Shared/Loading/Loading";
 import ApproveVendor from "../ApproveVendor/ApproveVendor";
-import MyTicket from "../MyTicket/MyTicket";
+import MyTicket from "../MyTicket/MyBookedTicket";
 import Payment from "../Payment/Payment";
 import PaymentCancelled from "../Payment/PaymentCancelled";
 import PaymentSuccess from "../Payment/PaymentSuccess";

@@ -13,7 +13,7 @@ const UserDashboardHome = () => {
   const navicon = [UserCircle, Ticket, CircleDollarSign];
   const navLink = [
     "/dashboard/profile",
-    "/dashboard/paymentHistory",
+    "/dashboard/my-booked-ticket",
     "/dashboard/paymentHistory",
   ];
   const navtext = [" Profile", "My Booked Tickets", "Transaction History"];
@@ -23,15 +23,11 @@ const UserDashboardHome = () => {
       {/* <div className="">User Profile</div>
       <div className="">My Booked Tickets</div>
       <div className="">Transaction History</div> */}
-      <div className="flex gap-5">
-        <div className="flex flex-col min-md:w-[350px] ">
+      <div className="flex gap-5 ">
+        <div className="flex flex-col min-h-svh bg-blue-200  min-md:w-[350px] ">
           {navicon.map((Icon, i) => {
             return (
-              <NavLink
-                to={navLink[i]}
-                key={"a" + i}
-                className="bg-blue-100 flex px-5 p-5"
-              >
+              <NavLink to={navLink[i]} key={"a" + i} className=" flex px-5 p-5">
                 <Icon />
                 <span className="px-5 max-md:hidden">{navtext[i]}</span>
               </NavLink>
