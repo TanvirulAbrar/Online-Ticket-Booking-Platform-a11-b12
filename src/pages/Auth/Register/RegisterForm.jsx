@@ -28,11 +28,12 @@ export default function RegisterForm() {
 
     registerUser(data.email, data.password)
       .then(() => {
-        // 1. store the image in form data
+        //  store  image
         const formData = new FormData();
         formData.append("image", profileImg);
 
-        // 2. send the photo to store and get the ul
+        // console.log(formData);
+        //
         const image_API_URL = `https://api.imgbb.com/1/upload?key=${
           import.meta.env.VITE_image_host_key
         }`;
@@ -40,7 +41,6 @@ export default function RegisterForm() {
         axios.post(image_API_URL, formData).then((res) => {
           const photoURL = res.data.data.url;
 
-          // create user in the database
           const userInfo = {
             email: data.email,
             displayName: data.name,
@@ -52,7 +52,6 @@ export default function RegisterForm() {
             }
           });
 
-          // update user profile to firebase
           const userProfile = {
             displayName: data.name,
             photoURL: photoURL,

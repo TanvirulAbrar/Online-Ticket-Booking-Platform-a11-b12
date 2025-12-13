@@ -13,27 +13,13 @@ const MyBookedTicket = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const {
-    isLoading,
-    data: tickets = [],
-    refetch,
-  } = useQuery({
-    queryKey: ["userticket", user?.email],
+  const { data: bookedTickets = [] } = useQuery({
+    queryKey: ["bookedTickets", user.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/tickets`);
-      const tickets = res.data;
-
-      const filteredData = [];
-
-      tickets.forEach((ticket) => {
-        ticket.booked?.forEach((b) => {
-          if (b.email === user?.email) {
-            filteredData.push(ticket);
-          }
-        });
-      });
-
-      return filteredData;
+      const res = await axiosSecure.get(`/booked-tickets?email=${user.email}`);
+      const data = res.data;
+      console.log(data);
+      return data;
     },
   });
 
@@ -83,11 +69,16 @@ const MyBookedTicket = () => {
 
   return (
     <div>
-      <h2>All of my : {tickets.length}</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {tickets.map((ticket, i) => {
-          return <BookedCard key={i + "ti"} ticket={ticket}></BookedCard>;
-        })}
+      <h2>Booked Ticket : {bookedTickets.length}</h2>
+      <div className="overflow-x-auto flex  w-full">
+        {" "}
+        <div className="grid grid-cols-3 max-sm:grid-cols-1 min-w-max  gap-4">
+          {bookedTickets.map((ticket, i) => {
+            return (
+              <BookedCard key={i + "ti"} bookedTicket={ticket}></BookedCard>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

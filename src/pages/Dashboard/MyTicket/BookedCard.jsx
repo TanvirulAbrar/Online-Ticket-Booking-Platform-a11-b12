@@ -19,10 +19,21 @@ import {
 
 import { NavLink } from "react-router";
 import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
-const BookedCard = ({ ticket }) => {
-  const [state, setstate] = useState("");
+const BookedCard = ({ bookedTicket }) => {
+  const [state, setstate] = useState(bookedTicket.state);
   const { user, loading } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const { isLoading, data: ticket = {} } = useQuery({
+    queryKey: ["ticket", bookedTicket._id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/tickets/${bookedTicket.TicketId}`);
+      console.log(res.data);
+      return res.data;
+    },
+  });
   const {
     _id,
     title,
@@ -42,9 +53,44 @@ const BookedCard = ({ ticket }) => {
       isAlreadyBooked && setstate(isAlreadyBooked.state);
     }
   }, [user, ticket]);
+  const [countdown, setCountdown] = useState("");
+
+  useEffect(() => {
+    if (!ticket?.departure) return;
+
+    const interval = setInterval(() => {
+      const departureTime = new Date(ticket.departure).getTime();
+      const now = new Date().getTime();
+
+      const distance = departureTime - now;
+
+      if (distance <= 0) {
+        setCountdown("Departed");
+        clearInterval(interval);
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      setCountdown(`${days}d : ${hours}h : ${minutes}m : ${seconds}s`);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [ticket]);
+
   return (
-    <NavLink to={`/details/${_id}`}>
-      <div className="p-4 bg-base-100 rounded-3xl max-w-80 border border-[#e1e1e1] transition-all duration-300 hover:border-indigo-400 hover:shadow-[0_0_20px_rgba(99,102,241,0.3)]">
+    <NavLink
+      className={`${ticket?.state === "hidden" && "hidden"} ${
+        !ticket && "hidden"
+      }`}
+      to={`/details/${_id}`}
+    >
+      <div className="p-4 bg-base-100 rounded-3xl w-60 border border-[#e1e1e1] transition-all duration-300 hover:border-indigo-400 hover:shadow-[0_0_20px_rgba(99,102,241,0.3)]">
         <figure className="overflow-hidden rounded-2xl h-50">
           <img
             className="w-full h-full object-cover"
@@ -60,10 +106,6 @@ const BookedCard = ({ ticket }) => {
             {" "}
             <div className="w-fit px-2 rounded-[5px] bg-green-200 font-bold text-[#198686]">
               <h2 className="text-[13px]">{transportType}</h2>
-            </div>
-            <div className="flex items-center gap-2 w-fit px-2 rounded-[5px] bg-blue-400 text-white text-[13px]  ">
-              <Ticket className="h-4 w-4 " />
-              <span>{quantity + "/" + quantity}</span>
             </div>
             <div className="flex items-center gap-2 w-fit px-2 rounded-[5px]  bg-[#ffffff] text-[13px] border  border-[#d4d4d4]  ">
               <Sparkles className="h-4 w-4" />
@@ -83,6 +125,23 @@ const BookedCard = ({ ticket }) => {
               <Tag className="w-4 h-4 mx-1  text-blue-500" /> {state}
             </div>
           )}
+          <div className="flex items-center gap-2 text-sm font-medium text-purple-600 mt-2">
+            <Clock className="w-4 h-4" />
+            <span>
+              {countdown === "Departed" ? (
+                <span className="text-red-500 font-semibold">Departed</span>
+              ) : (
+                <>
+                  Departure in:{" "}
+                  <span className="font-semibold">{countdown}</span>
+                </>
+              )}
+            </span>
+          </div>
+          <div className="flex items-center gap-2 w-fit px-2 rounded-[5px] bg-blue-400 text-white text-[13px]  ">
+            <Ticket className="h-4 w-4 " /> Booked quantity
+            <span>{bookedTicket.quantity + "/" + quantity}</span>
+          </div>
           <h2 className="pt-3 text-[16px] font-semibold">${price}</h2>
 
           <div className="card-actions flex items-center w-fit px-2 rounded-[5px] hover:bg-blue-200 font-bold text-[13px] text-[#311986]">

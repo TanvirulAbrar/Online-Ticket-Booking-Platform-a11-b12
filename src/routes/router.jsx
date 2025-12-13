@@ -14,6 +14,7 @@ import PrivateRoute from "./PrivateRoute";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
 import Profile from "../pages/Dashboard/profile/Profile";
 import MyBookedTicket from "../pages/Dashboard/MyTicket/MyBookedTicket";
+import AddTicket from "../pages/Dashboard/Add ticket/AddTicket";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +53,26 @@ export const router = createBrowserRouter([
           },
           {
             path: "/dashboard/paymentHistory",
+            Component: PaymentHistory,
+          },
+          {
+            path: "/dashboard/add-ticket",
+            Component: AddTicket,
+          },
+          {
+            path: "/dashboard/my-added-tickets",
+            Component: PaymentHistory,
+          },
+          {
+            path: "/dashboard/requested-bookings",
+            Component: PaymentHistory,
+          },
+          {
+            path: "/dashboard/revenue",
+            Component: PaymentHistory,
+          },
+          {
+            path: "/dashboard/overview",
             Component: PaymentHistory,
           },
         ],

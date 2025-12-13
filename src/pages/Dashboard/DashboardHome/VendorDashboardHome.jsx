@@ -7,7 +7,7 @@ import {
   CircleDollarSign,
   LayoutDashboard,
 } from "lucide-react";
-import { NavLink } from "react-router";
+import { NavLink, Outlet } from "react-router";
 
 const VendorDashboardHome = () => {
   const navicon = [
@@ -26,23 +26,45 @@ const VendorDashboardHome = () => {
     "Revenue",
     "Overview",
   ];
+  const navLink = [
+    "/dashboard/profile",
+    "/dashboard/add-ticket",
+    "/dashboard/my-added-tickets",
+    "/dashboard/requested-bookings",
+    "/dashboard/revenue",
+    "/dashboard/overview",
+  ];
   return (
     <div>
       <div className="">
-        <h2 className="text-4xl">VendorDashboardHome </h2>
-        <div className="flex flex-col">
-          {navicon.map((Icon, i) => {
-            return (
-              <NavLink
-                to={"/"}
-                key={"a" + i}
-                className="bg-blue-100 flex px-5 p-5"
-              >
-                <Icon />
-                <span className="px-5 max-md:hidden">{navtext[i]}</span>
-              </NavLink>
-            );
-          })}
+        <h1 className="text-3xl font-bold flex px-5 my-5">
+          <div className="w-[5px] mr-5 bg-blue-700"></div>Vendor Dashboard
+          <div className="w-[5px] ml-5 bg-blue-700"></div>
+        </h1>
+        {/* <div className="">User Profile</div>
+             <div className="">My Booked Tickets</div>
+             <div className="">Transaction History</div> */}
+        <div className="flex gap-5 ">
+          <div className="flex flex-col min-h-svh bg-blue-200  min-md:w-[350px] ">
+            {navicon.map((Icon, i) => {
+              return (
+                <NavLink
+                  to={navLink[i]}
+                  key={"a" + i}
+                  className=" flex px-5 p-5"
+                >
+                  <Icon />
+                  <span className="px-5 max-md:hidden">{navtext[i]}</span>
+                </NavLink>
+              );
+            })}
+          </div>
+          <div
+            className="w-full overflow-scroll
+               "
+          >
+            <Outlet></Outlet>
+          </div>
         </div>
       </div>
     </div>

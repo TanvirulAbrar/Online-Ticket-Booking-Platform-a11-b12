@@ -10,7 +10,8 @@
     "perks": ["AC", "WiFi"],
     "image": "https://i.ibb.co/b11b7qf/bus1.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Dhaka to Cox’s Bazar Premium Coach",
@@ -23,7 +24,8 @@
     "perks": ["AC", "TV", "Snacks"],
     "image": "https://i.ibb.co/y6vj7tq/bus2.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Chittagong to Sylhet Train Service",
@@ -36,7 +38,8 @@
     "perks": ["AC", "Sleeper"],
     "image": "https://i.ibb.co/09Jt6Fh/train1.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Dhaka to Rajshahi Intercity Train",
@@ -49,7 +52,8 @@
     "perks": ["AC", "Food"],
     "image": "https://i.ibb.co/VpJYsb4/train2.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Dhaka to Barisal Launch Night Trip",
@@ -62,7 +66,8 @@
     "perks": ["Cabin", "AC"],
     "image": "https://i.ibb.co/HKyvtGz/launch1.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Barisal to Dhaka Luxury Launch",
@@ -75,7 +80,8 @@
     "perks": ["AC", "VIP Cabin"],
     "image": "https://i.ibb.co/HKyvtGz/launch1.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Dhaka to Sylhet Air Express",
@@ -88,7 +94,8 @@
     "perks": ["Meal", "Luggage"],
     "image": "https://i.ibb.co/VScm1Sr/plane1.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Dhaka to Jessore Air Shuttle",
@@ -101,7 +108,8 @@
     "perks": ["Luggage"],
     "image": "https://i.ibb.co/YBdJymS/plane2.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Sylhet to Dhaka Greenline Bus",
@@ -114,7 +122,8 @@
     "perks": ["AC", "Snacks"],
     "image": "https://i.ibb.co/b11b7qf/bus1.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Cox’s Bazar to Dhaka Night Coach",
@@ -127,7 +136,8 @@
     "perks": ["AC"],
     "image": "https://i.ibb.co/y6vj7tq/bus2.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Rajshahi to Dhaka Intercity Train",
@@ -140,7 +150,8 @@
     "perks": ["Food"],
     "image": "https://i.ibb.co/09Jt6Fh/train1.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Sylhet to Chittagong Day Train",
@@ -153,7 +164,8 @@
     "perks": ["AC"],
     "image": "https://i.ibb.co/VpJYsb4/train2.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Dhaka to Khulna AC Bus",
@@ -166,7 +178,8 @@
     "perks": ["AC", "WiFi"],
     "image": "https://i.ibb.co/b11b7qf/bus1.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Khulna to Dhaka Super Bus",
@@ -179,7 +192,8 @@
     "perks": ["AC"],
     "image": "https://i.ibb.co/y6vj7tq/bus2.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Dhaka to Rangpur Night Coach",
@@ -192,7 +206,8 @@
     "perks": ["AC", "Snacks"],
     "image": "https://i.ibb.co/b11b7qf/bus1.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Rangpur to Dhaka Express",
@@ -205,7 +220,8 @@
     "perks": ["AC"],
     "image": "https://i.ibb.co/y6vj7tq/bus2.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Dhaka to Kolkata Flight",
@@ -218,7 +234,8 @@
     "perks": ["Meal", "Luggage"],
     "image": "https://i.ibb.co/VScm1Sr/plane1.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Chittagong to Dhaka Air Service",
@@ -231,7 +248,8 @@
     "perks": ["Luggage"],
     "image": "https://i.ibb.co/YBdJymS/plane2.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Dhaka to Kuakata Launch",
@@ -244,7 +262,8 @@
     "perks": ["AC Cabin", "Food"],
     "image": "https://i.ibb.co/HKyvtGz/launch1.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   },
   {
     "title": "Kuakata to Dhaka Luxury Launch",
@@ -257,6 +276,7 @@
     "perks": ["AC Cabin"],
     "image": "https://i.ibb.co/HKyvtGz/launch1.jpg",
     "booked": [],
-    "state": ""
+    "state": "",
+    "email": "m@m2.com"
   }
 ]

@@ -19,7 +19,10 @@ const UserDashboardHome = () => {
   const navtext = [" Profile", "My Booked Tickets", "Transaction History"];
   return (
     <div>
-      <h2 className="text-4xl">User</h2>
+      <h1 className="text-3xl font-bold flex px-5 my-5">
+        <div className="w-[5px] mr-5 bg-blue-700"></div>User Dashboard
+        <div className="w-[5px] ml-5 bg-blue-700"></div>
+      </h1>
       {/* <div className="">User Profile</div>
       <div className="">My Booked Tickets</div>
       <div className="">Transaction History</div> */}
@@ -34,7 +37,12 @@ const UserDashboardHome = () => {
             );
           })}
         </div>
-        <Outlet></Outlet>
+        <div
+          className="w-full overflow-scroll
+        "
+        >
+          <Outlet></Outlet>
+        </div>
       </div>
     </div>
   );

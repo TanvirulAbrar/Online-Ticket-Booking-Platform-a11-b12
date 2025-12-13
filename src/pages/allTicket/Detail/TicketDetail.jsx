@@ -51,11 +51,11 @@ const TicketDetail = () => {
     },
   });
 
-  const { data: bookedTicket = {}, refetchBooked } = useQuery({
-    queryKey: ["bookedticket", id],
+  const { data: bookedTicket = {}, refetch: refetchBooked } = useQuery({
+    queryKey: ["bookedticket", ticket._id],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/booked-tickets?TicketId=${id}&email=${user.email}`
+        `/booked-tickets?TicketId=${ticket._id}&email=${user.email}`
       );
       console.log("from detail", res.data);
       return res.data;
@@ -137,8 +137,6 @@ const TicketDetail = () => {
     // let booked = [];
 
     let data = {
-      email: user.email,
-      num: Number(bookedQuantity),
       state: "",
     };
 
@@ -152,46 +150,61 @@ const TicketDetail = () => {
       setstate("");
     }
     const newbookedTicket = {
-      TicketId: id,
+      TicketId: ticket._id,
       email: user.email,
       price: ticket.price * bookedQuantity,
-      quantity: quantity,
-      state: state,
+      quantity: bookedQuantity,
+      state: data.state,
+      createdBy: ticket.email,
     };
-    if (bookedTicket) {
-      axiosSecure
-        .patch(`/booked-tickets/${bookedTicket._id}`, newbookedTicket)
-        .then((res) => {
-          const data = res.data;
-          console.log("add c", data);
-          console.log("Submitted Data:", newbookedTicket);
+    if (!isbooked) {
+      if (bookedTicket.length > 0) {
+        axiosSecure
+          .patch(`/booked-tickets/${bookedTicket[0]._id}`, newbookedTicket)
+          .then((res) => {
+            const data = res.data;
+            console.log("add c", data);
+            console.log("Submitted Data:", newbookedTicket);
 
-          if (isbooked) {
-            toast("canceled successfully");
-            setisbooked(false);
-          } else {
-            toast.success(" booked successfully!");
-          }
-          refetchBooked();
-        })
-        .catch((error) => {
-          console.log(error);
-          toast.error("Server error — please try again later!");
-        });
+            if (isbooked) {
+              toast("canceled successfully");
+              setisbooked(false);
+            } else {
+              toast.success(" booked successfully! 1");
+            }
+            refetchBooked();
+          })
+          .catch((error) => {
+            console.log(error);
+            toast.error("Server error — please try again later!");
+          });
+      } else {
+        axiosSecure
+          .post(`/booked-tickets`, newbookedTicket)
+          .then((res) => {
+            const data = res.data;
+            console.log("add c", data);
+            console.log("Submitted Data:", newbookedTicket);
+
+            toast.success(" booked successfully! 2");
+
+            refetchBooked();
+          })
+          .catch((error) => {
+            console.log(error);
+            toast.error("Server error — please try again later!");
+          });
+      }
     } else {
       axiosSecure
-        .post(`/booked-tickets`, newbookedTicket)
+        .delete(`/booked-tickets/${bookedTicket[0]._id}`)
         .then((res) => {
           const data = res.data;
           console.log("add c", data);
-          console.log("Submitted Data:", newbookedTicket);
 
-          if (isbooked) {
-            toast("canceled successfully");
-            setisbooked(false);
-          } else {
-            toast.success(" booked successfully!");
-          }
+          toast("canceled successfully 3");
+          setisbooked(false);
+
           refetchBooked();
         })
         .catch((error) => {
@@ -268,7 +281,7 @@ const TicketDetail = () => {
                 state === "approved" && "hidden"
               }`}
             >
-              cancel
+              close
             </button>
           </div>
         </div>

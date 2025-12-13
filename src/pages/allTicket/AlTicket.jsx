@@ -16,7 +16,7 @@ const AlTicket = () => {
   const { isLoading, data: tickets = [] } = useQuery({
     queryKey: ["tickets"],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/tickets`);
+      const res = await axiosSecure.get(`/tickets?state=approved`);
       console.log(res.data);
       return res.data;
     },

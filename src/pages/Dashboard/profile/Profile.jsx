@@ -3,6 +3,7 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { data } from "react-router";
 import { useQuery } from "@tanstack/react-query";
+import { BadgeCheck } from "lucide-react";
 
 const Profile = () => {
   const { user, loading } = useAuth();
@@ -34,6 +35,16 @@ const Profile = () => {
       return filteredData;
     },
   });
+  const { data: userDb = {}, refetch: userRefetch } = useQuery({
+    queryKey: ["userDb", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users?email=${user?.email}`);
+      console.log(res.data);
+      const lodedData = res.data;
+
+      return lodedData;
+    },
+  });
   // const axiosSecure = useAxiosSecure();
   // const userdata = axiosSecure
   //   .get(`/users?email${user.email}`)
@@ -49,12 +60,17 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <div className="max-sm:mt-20">
+      <div className="max-sm:mt-20 shadow-sm">
         <div className="p-5 w-full flex flex-col justify-center items-center">
           {user && (
             <div className="text-[40px] font-bold">{user.displayName}</div>
           )}
-          {user && <div className="">{user.email}</div>}
+          {user && <div className="">Email:{user.email}</div>}
+
+          <div className="flex items-center gap-2 w-fit px-2 rounded-[5px] bg-blue-400 text-white text-[13px]  ">
+            <BadgeCheck className="h-4 w-4 " />
+            <span>{userDb[0]?.role}</span>
+          </div>
         </div>
       </div>
     </div>
