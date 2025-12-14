@@ -28,8 +28,8 @@ const DashboardHome = () => {
   return (
     <div className="">
       {/* <AdminDashboardHome></AdminDashboardHome> */}
+      <UserDashboardHome></UserDashboardHome>
       <VendorDashboardHome></VendorDashboardHome>
-      {/* <UserDashboardHome></UserDashboardHome> */}
       {/* <ApproveVendor></ApproveVendor>
        */}
       {/* <MyTicket></MyTicket>

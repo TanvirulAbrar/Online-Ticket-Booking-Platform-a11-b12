@@ -15,6 +15,7 @@ import {
   Ship,
   ChevronRight,
   Ticket,
+  ChevronRightCircle,
 } from "lucide-react";
 
 import { NavLink } from "react-router";
@@ -56,7 +57,7 @@ const BookedCard = ({ bookedTicket }) => {
   const [countdown, setCountdown] = useState("");
 
   useEffect(() => {
-    if (!ticket?.departure) return;
+    if (!ticket?.departure || state === "rejected") return;
 
     const interval = setInterval(() => {
       const departureTime = new Date(ticket.departure).getTime();
@@ -84,7 +85,7 @@ const BookedCard = ({ bookedTicket }) => {
   }, [ticket]);
 
   return (
-    <NavLink
+    <div
       className={`${ticket?.state === "hidden" && "hidden"} ${
         !ticket && "hidden"
       }`}
@@ -125,7 +126,11 @@ const BookedCard = ({ bookedTicket }) => {
               <Tag className="w-4 h-4 mx-1  text-blue-500" /> {state}
             </div>
           )}
-          <div className="flex items-center gap-2 text-sm font-medium text-purple-600 mt-2">
+          <div
+            className={` ${
+              state === "rejected" && "hidden"
+            } flex items-center gap-2 text-sm font-medium text-purple-600 mt-2`}
+          >
             <Clock className="w-4 h-4" />
             <span>
               {countdown === "Departed" ? (
@@ -133,7 +138,7 @@ const BookedCard = ({ bookedTicket }) => {
               ) : (
                 <>
                   Departure in:{" "}
-                  <span className="font-semibold">{countdown}</span>
+                  <span className={`font-semibold `}>{countdown}</span>
                 </>
               )}
             </span>
@@ -143,13 +148,24 @@ const BookedCard = ({ bookedTicket }) => {
             <span>{bookedTicket.quantity + "/" + quantity}</span>
           </div>
           <h2 className="pt-3 text-[16px] font-semibold">${price}</h2>
-
-          <div className="card-actions flex items-center w-fit px-2 rounded-[5px] hover:bg-blue-200 font-bold text-[13px] text-[#311986]">
+          {state == "accepted" && (
+            <button
+              // onClick={(e) => handelPayment(e)}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              {countdown === "Departed" ? "Time Ended" : "pay"}
+              <ChevronRightCircle className="w-5 h-5" />
+            </button>
+          )}
+          <NavLink
+            to={`/details/${_id}`}
+            className="card-actions flex items-center w-fit px-2 rounded-[5px] hover:bg-blue-200 font-bold text-[13px] text-[#311986]"
+          >
             more details <ChevronRight className="h-4 w-4" />
-          </div>
+          </NavLink>
         </div>
       </div>
-    </NavLink>
+    </div>
   );
 };
 

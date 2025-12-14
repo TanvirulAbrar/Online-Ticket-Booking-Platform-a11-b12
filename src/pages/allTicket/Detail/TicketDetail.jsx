@@ -156,6 +156,7 @@ const TicketDetail = () => {
       quantity: bookedQuantity,
       state: data.state,
       createdBy: ticket.email,
+      title: ticket.title,
     };
     if (!isbooked) {
       if (bookedTicket.length > 0) {
@@ -429,14 +430,14 @@ const TicketDetail = () => {
                 <button
                   onClick={() => setmodalActive(!modalActive)}
                   className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 ${
-                    state === "approved" && "hidden"
+                    state !== "pending" && "hidden"
                   }`}
                 >
                   {isbooked ? "cancel book" : "Book Now"}
                   <ChevronRightCircle className="w-5 h-5" />
                 </button>
               )}
-              {state == "approved" && (
+              {state == "accepted" && (
                 <button
                   onClick={(e) => handelPayment(e)}
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"

@@ -17,6 +17,7 @@ import MyBookedTicket from "../pages/Dashboard/MyTicket/MyBookedTicket";
 import AddTicket from "../pages/Dashboard/Add ticket/AddTicket";
 import MyAddedTicket from "../pages/Dashboard/MyAddedTicket/MyAddedTicket";
 import UpdateTicket from "../pages/Dashboard/UpdateTicket/UpdateTicket";
+import RequestBooking from "../pages/Dashboard/RequestedBooking/RequestBooking";
 
 export const router = createBrowserRouter([
   {
@@ -71,7 +72,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "/dashboard/requested-bookings",
-            Component: PaymentHistory,
+            Component: RequestBooking,
           },
           {
             path: "/dashboard/revenue",
