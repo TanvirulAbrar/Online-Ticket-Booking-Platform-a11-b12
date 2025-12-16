@@ -22,6 +22,7 @@ import { NavLink, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 const BookedCard = ({ bookedTicket }) => {
   const navigate = useNavigate();
@@ -146,12 +147,18 @@ const BookedCard = ({ bookedTicket }) => {
           </div>
           <div className="flex items-center gap-2 w-fit px-2 rounded-[5px] bg-blue-400 text-white text-[13px]  ">
             <Ticket className="h-4 w-4 " /> Booked quantity
-            <span>{bookedTicket.quantity + "/" + quantity}</span>
+            <span>{bookedTicket?.quantity + "/" + quantity}</span>
           </div>
           <h2 className="pt-3 text-[16px] font-semibold">${price}</h2>
           {state == "accepted" && (
             <button
-              onClick={() => navigate(`/dashboard/payment/${bookedTicket._id}`)}
+              onClick={() => {
+                if (countdown === "Departed") return;
+
+                if (Number(bookedTicket.quantity) > Number(ticket.quantity))
+                  return toast("available ticket less than booked");
+                navigate(`/dashboard/payment/${bookedTicket._id}`);
+              }}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
             >
               {countdown === "Departed" ? "Time Ended" : "pay"}

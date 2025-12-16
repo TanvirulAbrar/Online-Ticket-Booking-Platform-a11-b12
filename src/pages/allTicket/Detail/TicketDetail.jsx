@@ -54,7 +54,7 @@ const TicketDetail = () => {
   });
 
   const { data: bookedTicket = {}, refetch: refetchBooked } = useQuery({
-    queryKey: ["bookedticket", ticket._id],
+    queryKey: ["bookedticket", ticket._id, user.email],
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/booked-tickets?TicketId=${ticket._id}&email=${user.email}`
@@ -424,11 +424,7 @@ const TicketDetail = () => {
                 {bookedQuantity * price}
               </div>
 
-              {countdown === "Departed" ? (
-                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2">
-                  Departed <ChevronRightCircle className="w-5 h-5" />
-                </button>
-              ) : (
+              {countdown !== "Departed" && (
                 <button
                   onClick={() => setmodalActive(!modalActive)}
                   className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 ${
@@ -442,11 +438,26 @@ const TicketDetail = () => {
                 </button>
               )}
 
+              {bookedTicket.length > 0 && (
+                <div className="flex items-center gap-2 w-fit px-2 rounded-[5px] bg-blue-400 text-white text-[13px]  ">
+                  <Ticket className="h-4 w-4 " /> Booked quantity
+                  <span>
+                    {bookedTicket[0]?.quantity + "/" + ticket?.quantity}
+                  </span>
+                </div>
+              )}
+
               {state == "accepted" && (
                 <button
-                  onClick={() =>
-                    navigate(`/dashboard/payment/${bookedTicket[0]._id}`)
-                  }
+                  onClick={() => {
+                    if (countdown === "Departed") return;
+
+                    if (
+                      Number(bookedTicket[0].quantity) > Number(ticket.quantity)
+                    )
+                      return toast("available ticket less than booked");
+                    navigate(`/dashboard/payment/${bookedTicket._id}`);
+                  }}
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   {countdown === "Departed" ? "Time Ended" : "pay"}
