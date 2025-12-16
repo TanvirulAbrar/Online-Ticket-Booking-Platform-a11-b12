@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 
 import {
@@ -24,8 +24,10 @@ import Loading from "../../Shared/Loading/Loading";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import Payment from "../../Dashboard/Payment/Payment";
 
 const TicketDetail = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
@@ -373,10 +375,10 @@ const TicketDetail = () => {
             <div className="mb-4">
               <div className="flex items-end gap-2">
                 <span className="text-3xl font-bold text-gray-900">
-                  ৳{price}
+                  ${price}
                 </span>
                 <span className="text-sm line-through text-gray-400">
-                  ৳{price * 1.5}
+                  ${price * 1.5}
                 </span>
               </div>
 
@@ -430,16 +432,21 @@ const TicketDetail = () => {
                 <button
                   onClick={() => setmodalActive(!modalActive)}
                   className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 ${
-                    state !== "pending" && "hidden"
+                    state === "accepted" && "hidden"
+                  } ${state === "rejected" && "hidden"} ${
+                    state === "paid" && "hidden"
                   }`}
                 >
                   {isbooked ? "cancel book" : "Book Now"}
                   <ChevronRightCircle className="w-5 h-5" />
                 </button>
               )}
+
               {state == "accepted" && (
                 <button
-                  onClick={(e) => handelPayment(e)}
+                  onClick={() =>
+                    navigate(`/dashboard/payment/${bookedTicket[0]._id}`)
+                  }
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   {countdown === "Departed" ? "Time Ended" : "pay"}

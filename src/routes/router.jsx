@@ -18,6 +18,9 @@ import AddTicket from "../pages/Dashboard/Add ticket/AddTicket";
 import MyAddedTicket from "../pages/Dashboard/MyAddedTicket/MyAddedTicket";
 import UpdateTicket from "../pages/Dashboard/UpdateTicket/UpdateTicket";
 import RequestBooking from "../pages/Dashboard/RequestedBooking/RequestBooking";
+import PaymentSuccess from "../pages/Dashboard/Payment/PaymentSuccess";
+import PaymentCancelled from "../pages/Dashboard/Payment/PaymentCancelled";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -81,6 +84,18 @@ export const router = createBrowserRouter([
           {
             path: "/dashboard/overview",
             Component: PaymentHistory,
+          },
+          {
+            path: "/dashboard/payment-success",
+            Component: PaymentSuccess,
+          },
+          {
+            path: "/dashboard/payment/:id",
+            Component: Payment,
+          },
+          {
+            path: "payment-cancelled",
+            Component: PaymentCancelled,
           },
         ],
       },

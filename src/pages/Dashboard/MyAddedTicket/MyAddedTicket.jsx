@@ -70,7 +70,7 @@ const MyAddedTicket = () => {
 
   return (
     <div>
-      <h2>Booked Ticket : {Tickets.length}</h2>
+      <h2>My Added Ticket: {Tickets.length}</h2>
       <div className="overflow-x-auto flex  w-full">
         {" "}
         <div className="grid grid-cols-3 max-sm:grid-cols-1 min-w-max  gap-4">

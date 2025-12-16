@@ -18,12 +18,13 @@ import {
   ChevronRightCircle,
 } from "lucide-react";
 
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 
 const BookedCard = ({ bookedTicket }) => {
+  const navigate = useNavigate();
   const [state, setstate] = useState(bookedTicket.state);
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
@@ -150,7 +151,7 @@ const BookedCard = ({ bookedTicket }) => {
           <h2 className="pt-3 text-[16px] font-semibold">${price}</h2>
           {state == "accepted" && (
             <button
-              // onClick={(e) => handelPayment(e)}
+              onClick={() => navigate(`/dashboard/payment/${bookedTicket._id}`)}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
             >
               {countdown === "Departed" ? "Time Ended" : "pay"}
