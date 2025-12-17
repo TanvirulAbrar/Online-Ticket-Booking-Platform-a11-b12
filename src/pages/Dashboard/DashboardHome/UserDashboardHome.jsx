@@ -6,10 +6,12 @@ import {
   Inbox,
   CircleDollarSign,
   LayoutDashboard,
+  Home,
 } from "lucide-react";
-import { NavLink, Outlet } from "react-router";
+import { NavLink, Outlet, useNavigate } from "react-router";
 
 const UserDashboardHome = () => {
+  const navigate = useNavigate();
   const navicon = [UserCircle, Ticket, CircleDollarSign];
   const navLink = [
     "/dashboard/profile",
@@ -21,7 +23,17 @@ const UserDashboardHome = () => {
     <div>
       <h1 className="text-3xl font-bold flex px-5 my-5">
         <div className="w-[5px] mr-5 bg-blue-700"></div>User Dashboard
-        <div className="w-[5px] ml-5 bg-blue-700"></div>
+        <div className="w-full text-end text-white content-center bg-blue-400">
+          <div
+            onClick={() => {
+              navigate("/");
+            }}
+            className="btn mr-5"
+          >
+            {" "}
+            <Home className=" ml-auto"></Home>
+          </div>
+        </div>
       </h1>
       {/* <div className="">User Profile</div>
       <div className="">My Booked Tickets</div>

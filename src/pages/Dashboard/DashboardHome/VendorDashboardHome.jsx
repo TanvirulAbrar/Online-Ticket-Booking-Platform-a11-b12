@@ -8,15 +8,17 @@ import {
   LayoutDashboard,
 } from "lucide-react";
 import { NavLink, Outlet } from "react-router";
+import { useState } from "react";
 
 const VendorDashboardHome = () => {
+  // const [title, settitle] = useState("");
   const navicon = [
     UserCircle,
     TicketPlus,
     Ticket,
     Inbox,
     CircleDollarSign,
-    LayoutDashboard,
+    // LayoutDashboard,
   ];
   const navtext = [
     "Vendor Profile",
@@ -24,7 +26,7 @@ const VendorDashboardHome = () => {
     "My Added Tickets",
     "Requested Bookings",
     "Revenue",
-    "Overview",
+    // "Overview",
   ];
   const navLink = [
     "/dashboard/profile",
@@ -39,7 +41,8 @@ const VendorDashboardHome = () => {
       <div className="">
         <h1 className="text-3xl font-bold flex px-5 my-5">
           <div className="w-[5px] mr-5 bg-blue-700"></div>Vendor Dashboard
-          <div className="w-[5px] ml-5 bg-blue-700"></div>
+          {/* <div className="w-[5px] ml-5 bg-blue-700"></div> */}
+          <div className="w-full pl-5 content-center  bg-blue-400"></div>
         </h1>
         {/* <div className="">User Profile</div>
              <div className="">My Booked Tickets</div>
@@ -50,6 +53,7 @@ const VendorDashboardHome = () => {
               return (
                 <NavLink
                   to={navLink[i]}
+                  // onClick={() => settitle(navtext[i])}
                   key={"a" + i}
                   className=" flex px-5 p-5"
                 >

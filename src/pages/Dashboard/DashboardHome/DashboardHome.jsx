@@ -11,6 +11,7 @@ import Payment from "../Payment/Payment";
 import PaymentCancelled from "../Payment/PaymentCancelled";
 import PaymentSuccess from "../Payment/PaymentSuccess";
 import PaymentHistory from "../PaymentHistory/PaymentHistory";
+import RevenueOverviewChart from "../RevenueOverview/RevenueOverviewChart";
 
 const DashboardHome = () => {
   // const { role, roleLoading } = useRole();
@@ -27,7 +28,7 @@ const DashboardHome = () => {
 
   return (
     <div className="">
-      {/* <AdminDashboardHome></AdminDashboardHome> */}
+      <AdminDashboardHome></AdminDashboardHome>
       <UserDashboardHome></UserDashboardHome>
       <VendorDashboardHome></VendorDashboardHome>
       {/* <ApproveVendor></ApproveVendor>

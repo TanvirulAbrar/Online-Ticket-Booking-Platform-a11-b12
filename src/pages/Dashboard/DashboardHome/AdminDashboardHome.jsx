@@ -2,16 +2,23 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Legend, Pie, PieChart, Tooltip } from "recharts";
-import { ShieldUser, Tickets, Users, Megaphone } from "lucide-react";
-import { NavLink } from "react-router";
+import { ShieldUser, Tickets, Users, Megaphone, Home } from "lucide-react";
+import { NavLink, Outlet, useNavigate } from "react-router";
 
 const AdminDashboardHome = () => {
+  const navigate = useNavigate();
   const navicon = [ShieldUser, Tickets, Users, Megaphone];
   const navtext = [
     "Profile",
     "Manage Ticket",
     "Manage Users",
     "Advertise Tickets",
+  ];
+  const navLink = [
+    "/dashboard/profile",
+    "/dashboard/manage-ticket",
+    "/dashboard/manage-user",
+    "/dashboard/advertise",
   ];
   const axiosSecure = useAxiosSecure();
   const { data: ticketStats = [] } = useQuery({
@@ -30,70 +37,37 @@ const AdminDashboardHome = () => {
 
   return (
     <div>
-      <h2 className="text-4xl">Admin Dashing</h2>
-      <div className="flex flex-col">
-        {navicon.map((Icon, i) => {
-          return (
-            <NavLink
-              to={"/"}
-              key={"a" + i}
-              className="bg-blue-100 flex px-5 p-5"
-            >
-              <Icon />
-              <span className="px-5 max-md:hidden">{navtext[i]}</span>
-            </NavLink>
-          );
-        })}
-      </div>
-      <div className="stats shadow">
-        {ticketStats.map((stat) => (
-          <div key={stat._id} className="stat">
-            <div className="stat-figure text-secondary">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                className="inline-block h-8 w-8 stroke-current"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                ></path>
-              </svg>
-            </div>
-            <div className="stat-title text-2xl">{stat._id}</div>
-            <div className="stat-value">{stat.count}</div>
-            <div className="stat-desc">Jan 1st - Feb 1st</div>
+      <h1 className="text-3xl font-bold flex px-5 my-5">
+        <div className="w-[5px] mr-5 bg-blue-700"></div>Admin Dashboard
+        <div className="w-full text-end text-white content-center bg-blue-400">
+          <div
+            onClick={() => {
+              navigate("/");
+            }}
+            className="btn mr-5"
+          >
+            {" "}
+            <Home className=" ml-auto"></Home>
           </div>
-        ))}
-      </div>
-      <div className="w-full h-[400px]">
-        <PieChart
-          style={{
-            width: "100%",
-            maxWidth: "500px",
-            maxHeight: "80vh",
-            aspectRatio: 2,
-          }}
-          responsive
+        </div>
+      </h1>
+      <div className="flex gap-5 ">
+        <div className="flex flex-col min-h-svh bg-blue-200  min-md:w-[350px] ">
+          {navicon.map((Icon, i) => {
+            return (
+              <NavLink to={navLink[i]} key={"a" + i} className=" flex px-5 p-5">
+                <Icon />
+                <span className="px-5 max-md:hidden">{navtext[i]}</span>
+              </NavLink>
+            );
+          })}
+        </div>
+        <div
+          className="w-full overflow-scroll
+        "
         >
-          <Pie
-            dataKey="value"
-            startAngle={180}
-            endAngle={0}
-            data={getPieChartData(ticketStats)}
-            cx="50%"
-            cy="100%"
-            outerRadius="120%"
-            fill="#8884d8"
-            label
-            isAnimationActive={true}
-          />
-          <Legend></Legend>
-          <Tooltip></Tooltip>
-        </PieChart>
+          <Outlet></Outlet>
+        </div>
       </div>
     </div>
   );

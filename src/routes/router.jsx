@@ -21,6 +21,10 @@ import RequestBooking from "../pages/Dashboard/RequestedBooking/RequestBooking";
 import PaymentSuccess from "../pages/Dashboard/Payment/PaymentSuccess";
 import PaymentCancelled from "../pages/Dashboard/Payment/PaymentCancelled";
 import Payment from "../pages/Dashboard/Payment/Payment";
+import RevenueOverview from "../pages/Dashboard/RevenueOverview/RevenueOverview";
+import ManageTicket from "../pages/Dashboard/Manage ticket/ManageTicket";
+import ManageUser from "../pages/Dashboard/Manage User/ManageUser";
+import Advertise from "../pages/Dashboard/Advertise/Advertise";
 
 export const router = createBrowserRouter([
   {
@@ -41,64 +45,7 @@ export const router = createBrowserRouter([
         path: "/register",
         Component: Register,
       },
-      {
-        path: "/dashboard",
-        element: (
-          <PrivateRoute>
-            <DashboardHome />
-          </PrivateRoute>
-        ),
-        children: [
-          {
-            path: "/dashboard/profile",
-            Component: Profile,
-          },
-          {
-            path: "/dashboard/my-booked-ticket",
-            Component: MyBookedTicket,
-          },
-          {
-            path: "/dashboard/paymentHistory",
-            Component: PaymentHistory,
-          },
-          {
-            path: "/dashboard/add-ticket",
-            Component: AddTicket,
-          },
-          {
-            path: "/dashboard/my-added-tickets",
-            Component: MyAddedTicket,
-          },
-          {
-            path: "/dashboard/update/:id",
-            Component: UpdateTicket,
-          },
-          {
-            path: "/dashboard/requested-bookings",
-            Component: RequestBooking,
-          },
-          {
-            path: "/dashboard/revenue",
-            Component: PaymentHistory,
-          },
-          {
-            path: "/dashboard/overview",
-            Component: PaymentHistory,
-          },
-          {
-            path: "/dashboard/payment-success",
-            Component: PaymentSuccess,
-          },
-          {
-            path: "/dashboard/payment/:id",
-            Component: Payment,
-          },
-          {
-            path: "payment-cancelled",
-            Component: PaymentCancelled,
-          },
-        ],
-      },
+
       {
         path: "/alltickets",
         Component: AlTicket,
@@ -110,6 +57,76 @@ export const router = createBrowserRouter([
             <TicketDetail />
           </PrivateRoute>
         ),
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardHome />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "/dashboard/profile",
+        Component: Profile,
+      },
+      {
+        path: "/dashboard/my-booked-ticket",
+        Component: MyBookedTicket,
+      },
+      {
+        path: "/dashboard/paymentHistory",
+        Component: PaymentHistory,
+      },
+      {
+        path: "/dashboard/add-ticket",
+        Component: AddTicket,
+      },
+      {
+        path: "/dashboard/my-added-tickets",
+        Component: MyAddedTicket,
+      },
+      {
+        path: "/dashboard/update/:id",
+        Component: UpdateTicket,
+      },
+      {
+        path: "/dashboard/requested-bookings",
+        Component: RequestBooking,
+      },
+      {
+        path: "/dashboard/revenue",
+        Component: RevenueOverview,
+      },
+      {
+        path: "/dashboard/overview",
+        Component: PaymentHistory,
+      },
+      {
+        path: "/dashboard/payment-success",
+        Component: PaymentSuccess,
+      },
+      {
+        path: "/dashboard/payment/:id",
+        Component: Payment,
+      },
+      {
+        path: "/dashboard/payment-cancelled",
+        Component: PaymentCancelled,
+      },
+      {
+        path: "/dashboard/manage-ticket",
+        Component: ManageTicket,
+      },
+      {
+        path: "/dashboard/manage-user",
+        Component: ManageUser,
+      },
+      {
+        path: "/dashboard/advertise",
+        Component: Advertise,
       },
     ],
   },
