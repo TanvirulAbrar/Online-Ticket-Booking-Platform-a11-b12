@@ -48,7 +48,7 @@ const TicketDetail = () => {
     queryKey: ["ticket", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/tickets/${id}`);
-      // console.log(res.data);
+      console.log(res.data);
       return res.data;
     },
   });
@@ -129,10 +129,10 @@ const TicketDetail = () => {
       return;
     }
     if (bookedQuantity <= 0 && !isbooked) {
-      return toast.error("quantity cannot be 0 or less. or more ");
+      return toast.error("quantity is 0 or less ");
     }
     if (bookedQuantity > ticket.quantity && !isbooked) {
-      return toast.error("quantity cannot be 0 or less. or more ");
+      return toast.error("quantity is more than available");
     }
     console.log(user);
     // let quantity = ticket.quantity;

@@ -9,8 +9,7 @@ const AddCad = ({ ticketa }) => {
       <div
         className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
         style={{
-          backgroundImage:
-            "url('https://images.pexels.com/photos/1285625/pexels-photo-1285625.jpeg')",
+          backgroundImage: `url('${ticket?.image}')`,
         }}
       ></div>
 

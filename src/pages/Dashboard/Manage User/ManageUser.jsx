@@ -19,7 +19,13 @@ const ManageUser = () => {
 
   return (
     <div>
-      <h2 className="text-5xl">RequestBooking {users.length}</h2>
+      <h2 className="text-4xl font-semibold text-gray-700 flex items-center gap-2">
+        Manage Users
+        <span className="px-3 py-1 text-xl rounded-full bg-blue-100 text-blue-600">
+          {users.length}
+        </span>
+      </h2>
+
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           {/* head */}

@@ -12,14 +12,14 @@ const Advertise = () => {
   const { data: tickets = [] } = useQuery({
     queryKey: ["pendingTicket", user.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/tickets`);
+      const res = await axiosSecure.get(`/tickets?state=approved`);
       return res.data;
     },
   });
 
   return (
     <div>
-      <h2 className="text-5xl">RequestBooking {tickets.length}</h2>
+      <h2 className="text-5xl">Advertise {tickets.length}</h2>
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           {/* head */}

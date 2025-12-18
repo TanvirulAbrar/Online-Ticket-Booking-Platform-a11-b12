@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Legend, Pie, PieChart, Tooltip } from "recharts";
 import { ShieldUser, Tickets, Users, Megaphone, Home } from "lucide-react";
 import { NavLink, Outlet, useNavigate } from "react-router";
+import { ToastContainer } from "react-toastify";
 
 const AdminDashboardHome = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const AdminDashboardHome = () => {
     "Advertise Tickets",
   ];
   const navLink = [
-    "/dashboard/profile",
+    "/dashboard",
     "/dashboard/manage-ticket",
     "/dashboard/manage-user",
     "/dashboard/advertise",
@@ -37,6 +38,7 @@ const AdminDashboardHome = () => {
 
   return (
     <div>
+      {/* <ToastContainer></ToastContainer> */}
       <h1 className="text-3xl font-bold flex px-5 my-5">
         <div className="w-[5px] mr-5 bg-blue-700"></div>Admin Dashboard
         <div className="w-full text-end text-white content-center bg-blue-400">

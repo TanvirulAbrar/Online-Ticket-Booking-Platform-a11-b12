@@ -17,16 +17,23 @@ const ManageUserCard = ({ user, index }) => {
 
   const changeState = (e, state) => {
     e.preventDefault();
-    setrole(state);
-    // axiosSecure
-    //   .patch(`/tickets/${ticket._id}/state`, { state: state })
-    //   .then((res) => {
-    //     toast(`successful`);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     toast.error(`error`);
-    //   });
+    const newUser = {
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      role: state,
+      createdAt: user.createdAt,
+    };
+    axiosSecure
+      .patch(`/users/${user._id}/role`, newUser)
+      .then((res) => {
+        toast(`successful`);
+        setrole(state);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(`error`);
+      });
   };
   return (
     <tr key={user._id}>

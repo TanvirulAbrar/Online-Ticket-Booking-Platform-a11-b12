@@ -24,7 +24,18 @@ const UpdateTicket = () => {
       return data;
     },
   });
-  const [perks, setperks] = useState(["AC", "WiFi", "Breakfast"]);
+  const [perks, setperks] = useState([
+    "AC",
+    "Cabin",
+    "Food",
+    "Luggage",
+    "Meal",
+    "Sleeper",
+    "Snacks",
+    "TV",
+    "VIP Cabin",
+    "WiFi",
+  ]);
 
   const [ticketPerks, setticketPerks] = useState([]);
   //   const [AC, setAC] = useState(false);
@@ -82,7 +93,7 @@ const UpdateTicket = () => {
         from: e.target.from.value,
         to: e.target.to.value,
         transportType: e.target.transportType.value,
-        price: e.target.price.value,
+        price: Number(e.target.price.value),
         quantity: e.target.quantity.value,
         departure: e.target.departure.value,
         perks: ticketPerks,

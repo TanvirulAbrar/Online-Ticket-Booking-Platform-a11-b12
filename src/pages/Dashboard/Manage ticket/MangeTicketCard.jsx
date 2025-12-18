@@ -10,16 +10,17 @@ const ManageTicketCard = ({ ticket, index }) => {
 
   const changeState = (e, state) => {
     e.preventDefault();
-    // setState(state);
-    // axiosSecure
-    //   .patch(`/tickets/${ticket._id}/state`, { state: state })
-    //   .then((res) => {
-    //     toast(`successful`);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     toast.error(`error`);
-    //   });
+
+    axiosSecure
+      .patch(`/tickets/${ticket._id}/admin-state`, { state: state })
+      .then((res) => {
+        toast(`successful`);
+        setState(state);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(`error`);
+      });
   };
   return (
     <tr key={ticket._id}>
@@ -32,7 +33,7 @@ const ManageTicketCard = ({ ticket, index }) => {
       <td className="flex gap-3">
         <div
           onClick={(e) => {
-            changeState(e, "accepted");
+            changeState(e, "approved");
           }}
           className="btn btn-square"
         >

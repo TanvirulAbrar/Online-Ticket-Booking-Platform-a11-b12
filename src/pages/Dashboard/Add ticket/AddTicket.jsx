@@ -6,7 +6,18 @@ import useAuth from "../../../hooks/useAuth";
 
 const AddTicket = () => {
   const { user } = useAuth();
-  const perks = ["AC", "WiFi", "Breakfast"];
+  const perks = [
+    "AC",
+    "Cabin",
+    "Food",
+    "Luggage",
+    "Meal",
+    "Sleeper",
+    "Snacks",
+    "TV",
+    "VIP Cabin",
+    "WiFi",
+  ];
   const axiosSecure = useAxiosSecure();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,8 +52,8 @@ const AddTicket = () => {
         from: e.target.from.value,
         to: e.target.to.value,
         transportType: e.target.transportType.value,
-        price: e.target.price.value,
-        quantity: e.target.quantity.value,
+        price: Number(e.target.price.value),
+        quantity: Number(e.target.quantity.value),
         departure: e.target.departure.value,
         perks: perksSelected,
         image: photoURL,

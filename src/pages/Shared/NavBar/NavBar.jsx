@@ -23,10 +23,6 @@ const NavBar = () => {
         <NavLink to="/alltickets">All Tickets</NavLink>
       </li>
 
-      <li>
-        <NavLink to="/dashboard">Dashboard</NavLink>
-      </li>
-
       {user && (
         <>
           <li>
@@ -84,9 +80,6 @@ const NavBar = () => {
             Log in
           </Link>
         )}
-        <Link className="btn bg-blue-500 text-white mx-4" to="/c">
-          get
-        </Link>
       </div>
     </div>
   );

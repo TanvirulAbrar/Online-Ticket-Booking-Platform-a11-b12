@@ -12,7 +12,7 @@ const MainLayout = () => {
     <div className="max-w-7xl mx-auto">
       <NavBar></NavBar>
       <Outlet></Outlet>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       <Footer></Footer>
     </div>
   );

@@ -6,11 +6,14 @@ import {
   Inbox,
   CircleDollarSign,
   LayoutDashboard,
+  Home,
 } from "lucide-react";
-import { NavLink, Outlet } from "react-router";
+import { NavLink, Outlet, useNavigate } from "react-router";
 import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 const VendorDashboardHome = () => {
+  const navigate = useNavigate();
   // const [title, settitle] = useState("");
   const navicon = [
     UserCircle,
@@ -29,7 +32,7 @@ const VendorDashboardHome = () => {
     // "Overview",
   ];
   const navLink = [
-    "/dashboard/profile",
+    "/dashboard",
     "/dashboard/add-ticket",
     "/dashboard/my-added-tickets",
     "/dashboard/requested-bookings",
@@ -38,11 +41,22 @@ const VendorDashboardHome = () => {
   ];
   return (
     <div>
+      {/* <ToastContainer></ToastContainer> */}
+
       <div className="">
         <h1 className="text-3xl font-bold flex px-5 my-5">
           <div className="w-[5px] mr-5 bg-blue-700"></div>Vendor Dashboard
-          {/* <div className="w-[5px] ml-5 bg-blue-700"></div> */}
-          <div className="w-full pl-5 content-center  bg-blue-400"></div>
+          <div className="w-full text-end text-white content-center bg-blue-400">
+            <div
+              onClick={() => {
+                navigate("/");
+              }}
+              className="btn mr-5"
+            >
+              {" "}
+              <Home className=" ml-auto"></Home>
+            </div>
+          </div>
         </h1>
         {/* <div className="">User Profile</div>
              <div className="">My Booked Tickets</div>

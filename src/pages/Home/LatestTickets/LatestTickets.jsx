@@ -1,12 +1,10 @@
-import React from "react";
-import { NavLink } from "react-router";
-import { Star, Wallet, Package, Truck, Gift, ArrowRight } from "lucide-react";
-import AddCad from "./AddCad";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-
-import Loading from "../../Shared/Loading/Loading";
+import React, { useEffect, useState } from "react";
+import TicketCard from "../../allTicket/card/TicketCard";
 import { useQuery } from "@tanstack/react-query";
-const Adds = () => {
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Loading from "../../Shared/Loading/Loading";
+
+const LatestTickets = () => {
   // const [tickets, settickets] = useState([]);
   // useEffect(() => {
   //   fetch("/tickets.json")
@@ -16,11 +14,9 @@ const Adds = () => {
   // }, []);
   const axiosSecure = useAxiosSecure();
   const { isLoading, data: tickets = [] } = useQuery({
-    queryKey: ["adstickets"],
+    queryKey: ["tickets"],
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        `/tickets?advertise=added&state=approved`
-      );
+      const res = await axiosSecure.get(`/tickets?state=approved`);
       console.log(res.data);
       return res.data;
     },
@@ -29,20 +25,18 @@ const Adds = () => {
   if (!tickets) return <Loading />;
   return (
     <div className="max-w-[1000px] p-5 mx-auto">
-      <h1 className="text-3xl font-bold flex  my-5">
-        <div className="w-[5px] mr-5 bg-blue-700"></div>Advertisement
+      <h1 className="text-3xl p-5 font-bold flex  my-5">
+        <div className="w-[5px] mr-5 bg-blue-700"></div> Latest
         <div className="w-[5px] ml-5 bg-blue-700"></div>
       </h1>
 
       <div className="grid grid-cols-3 gap-5">
-        {" "}
-        {/* 1 */}
-        {tickets.map((ticket) => {
-          return <AddCad key={ticket._id} ticketa={ticket}></AddCad>;
+        {tickets.slice(0, 8).map((ticket, i) => {
+          return <TicketCard key={i + "ti"} ticket={ticket}></TicketCard>;
         })}
       </div>
     </div>
   );
 };
 
-export default Adds;
+export default LatestTickets;

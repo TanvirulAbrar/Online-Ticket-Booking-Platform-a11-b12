@@ -25,6 +25,8 @@ import RevenueOverview from "../pages/Dashboard/RevenueOverview/RevenueOverview"
 import ManageTicket from "../pages/Dashboard/Manage ticket/ManageTicket";
 import ManageUser from "../pages/Dashboard/Manage User/ManageUser";
 import Advertise from "../pages/Dashboard/Advertise/Advertise";
+import AdminRoute from "./AdminRoute";
+import VendorRoute from "./VendorRoute";
 
 export const router = createBrowserRouter([
   {
@@ -69,7 +71,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/dashboard/profile",
+        index: true,
         Component: Profile,
       },
       {
@@ -81,52 +83,85 @@ export const router = createBrowserRouter([
         Component: PaymentHistory,
       },
       {
+        path: "/dashboard/payment/:id",
+        Component: Payment,
+      },
+      {
         path: "/dashboard/add-ticket",
-        Component: AddTicket,
+        element: (
+          <VendorRoute>
+            <AddTicket />
+          </VendorRoute>
+        ),
       },
       {
         path: "/dashboard/my-added-tickets",
-        Component: MyAddedTicket,
+        element: (
+          <VendorRoute>
+            <MyAddedTicket />
+          </VendorRoute>
+        ),
       },
       {
         path: "/dashboard/update/:id",
-        Component: UpdateTicket,
+        element: (
+          <VendorRoute>
+            <UpdateTicket />
+          </VendorRoute>
+        ),
       },
       {
         path: "/dashboard/requested-bookings",
-        Component: RequestBooking,
+        element: (
+          <VendorRoute>
+            <RequestBooking />
+          </VendorRoute>
+        ),
       },
       {
         path: "/dashboard/revenue",
-        Component: RevenueOverview,
+        element: (
+          <VendorRoute>
+            <RevenueOverview />
+          </VendorRoute>
+        ),
       },
-      {
-        path: "/dashboard/overview",
-        Component: PaymentHistory,
-      },
+      // {
+      //   path: "/dashboard/overview",
+      //   Component: PaymentHistory,
+      // },
       {
         path: "/dashboard/payment-success",
         Component: PaymentSuccess,
       },
-      {
-        path: "/dashboard/payment/:id",
-        Component: Payment,
-      },
+
       {
         path: "/dashboard/payment-cancelled",
         Component: PaymentCancelled,
       },
       {
         path: "/dashboard/manage-ticket",
-        Component: ManageTicket,
+        element: (
+          <AdminRoute>
+            <ManageTicket></ManageTicket>
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/manage-user",
-        Component: ManageUser,
+        element: (
+          <AdminRoute>
+            <ManageUser />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/advertise",
-        Component: Advertise,
+        element: (
+          <AdminRoute>
+            <Advertise />
+          </AdminRoute>
+        ),
       },
     ],
   },

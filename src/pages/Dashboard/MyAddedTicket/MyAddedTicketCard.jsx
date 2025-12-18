@@ -17,7 +17,7 @@ import {
   Ticket,
 } from "lucide-react";
 
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
@@ -25,6 +25,7 @@ import { useQuery } from "@tanstack/react-query";
 const MyAddedTicketCard = ({ ticket, handleTicketDelete }) => {
   const [state, setstate] = useState(ticket.state);
   const { user, loading } = useAuth();
+  const navigate = useNavigate();
 
   const {
     _id,
@@ -126,16 +127,31 @@ const MyAddedTicketCard = ({ ticket, handleTicketDelete }) => {
 
           <h2 className="pt-3 text-[16px] font-semibold">${price}</h2>
 
-          <NavLink
+          {/* <NavLink
             to={`/dashboard/update/${ticket._id}`}
             className="btn bg-blue-100 text-blue-500"
             // onClick={() => handleTicketDelete(ticket._id)}
+          ></NavLink> */}
+
+          <button
+            className="btn bg-blue-100 text-blue-500"
+            onClick={() => {
+              if (state === "rejected") {
+                return;
+              }
+              navigate(`/dashboard/update/${ticket._id}`);
+            }}
           >
             update
-          </NavLink>
+          </button>
           <button
             className="btn bg-red-100 text-red-500"
-            onClick={() => handleTicketDelete(ticket._id)}
+            onClick={() => {
+              if (state === "rejected") {
+                return;
+              }
+              handleTicketDelete(ticket._id);
+            }}
           >
             delete
           </button>

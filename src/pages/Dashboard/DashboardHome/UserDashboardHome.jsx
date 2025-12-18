@@ -9,18 +9,20 @@ import {
   Home,
 } from "lucide-react";
 import { NavLink, Outlet, useNavigate } from "react-router";
+import { ToastContainer } from "react-toastify";
 
 const UserDashboardHome = () => {
   const navigate = useNavigate();
   const navicon = [UserCircle, Ticket, CircleDollarSign];
   const navLink = [
-    "/dashboard/profile",
+    "/dashboard",
     "/dashboard/my-booked-ticket",
     "/dashboard/paymentHistory",
   ];
   const navtext = [" Profile", "My Booked Tickets", "Transaction History"];
   return (
     <div>
+      {/* <ToastContainer></ToastContainer> */}
       <h1 className="text-3xl font-bold flex px-5 my-5">
         <div className="w-[5px] mr-5 bg-blue-700"></div>User Dashboard
         <div className="w-full text-end text-white content-center bg-blue-400">
