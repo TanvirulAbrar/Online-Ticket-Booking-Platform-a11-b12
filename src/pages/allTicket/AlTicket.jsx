@@ -37,7 +37,7 @@ const AlTicket = () => {
           `${title ? `&title=${title}` : ""}`
       );
 
-      console.log(res.data);
+      //console.log(res.data);
       // console.log(res.data);
       const data = res.data;
       setfilterdata(data?.tickets);
@@ -85,7 +85,7 @@ const AlTicket = () => {
   const handelFilterReset = async (e) => {
     e.preventDefault();
     const res = await axiosSecure.get(`/tickets/all/0?state=approved`);
-    console.log(res.data?.tickets);
+    // console.log(res.data?.tickets);
     const data = res.data;
     setfilterdata(data?.tickets);
     // setpage(data.pages.length);
@@ -117,7 +117,7 @@ const AlTicket = () => {
   const handelsortb = (e) => {
     e.preventDefault();
     setpage(0);
-    console.log(e.target);
+    // console.log(e.target);
     settransportType(e.target.innerText);
   };
   return (

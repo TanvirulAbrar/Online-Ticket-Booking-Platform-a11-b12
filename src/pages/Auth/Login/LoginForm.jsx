@@ -22,11 +22,11 @@ export default function LoginForm() {
 
   const handleLogin = (data, event) => {
     event.preventDefault();
-    console.log("form data", data);
+    //console.log("form data", data);
     signInUser(data.email, data.password)
       .then((result) => {
         toast("login successful");
-        console.log(result.user);
+        //console.log(result.user);
         navigate(location?.state || "/");
       })
       .catch((error) => {
@@ -118,7 +118,7 @@ export default function LoginForm() {
         </div> */}
         <SocialLogin></SocialLogin>
       </form>
-      <div className=" bg-[url('/rm222batch5-kul-03.jpg')] bg-cover bg-center w-full"></div>
+      <div className=" bg-[url('/rm222batch5-kul-03.jpg')] bg-cover bg-center w-full max-sm:hidden"></div>
     </div>
   );
 }

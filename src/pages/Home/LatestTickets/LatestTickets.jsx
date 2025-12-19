@@ -17,7 +17,7 @@ const LatestTickets = () => {
     queryKey: ["tickets"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/tickets?state=approved`);
-      console.log(res.data);
+      //console.log(res.data);
       return res.data;
     },
   });
@@ -30,7 +30,7 @@ const LatestTickets = () => {
         <div className="w-[5px] ml-5 bg-blue-700"></div>
       </h1>
 
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-3 max-sm:grid-cols-1 max-md:grid-cols-2 gap-5">
         {tickets.slice(0, 8).map((ticket, i) => {
           return <TicketCard key={i + "ti"} ticket={ticket}></TicketCard>;
         })}

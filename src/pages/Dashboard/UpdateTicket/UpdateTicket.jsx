@@ -20,7 +20,7 @@ const UpdateTicket = () => {
       const res = await axiosSecure.get(`/tickets/${id}`);
       const data = res.data;
       data && setticket(data);
-      console.log(data);
+      //console.log(data);
       return data;
     },
   });
@@ -45,7 +45,7 @@ const UpdateTicket = () => {
     if (ticket && ticket.perks) {
       setticketPerks(ticket.perks);
       setperks([...perks]);
-      console.log(ticket.perks);
+      //console.log(ticket.perks);
     }
 
     //   setAC()
@@ -102,7 +102,7 @@ const UpdateTicket = () => {
         email: e.target.email.value,
       };
 
-      console.log(photoURL);
+      //console.log(photoURL);
       axiosSecure
         .patch(`/tickets/${id}`, ticket)
         .then((res) => {
@@ -252,7 +252,7 @@ const UpdateTicket = () => {
 
       <div className="mb-4">
         <label className="block font-semibold mb-1">Vendor Name</label>
-        <div className="">{user?.name}</div>
+        <div className="">{user?.displayName}</div>
       </div>
 
       <div className="mb-6">

@@ -13,18 +13,18 @@ const MyBookedTicket = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data: bookedTickets = [] } = useQuery({
+  const { data: bookedTickets = [], refetch } = useQuery({
     queryKey: ["bookedTickets", user.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/booked-tickets?email=${user.email}`);
       const data = res.data;
-      console.log(data);
+      //console.log(data);
       return data;
     },
   });
 
   const handleTicketDelete = (id) => {
-    console.log(id);
+    //console.log(id);
 
     Swal.fire({
       title: "Are you sure?",
@@ -37,7 +37,7 @@ const MyBookedTicket = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/tickets/${id}`).then((res) => {
-          console.log(res.data);
+          //console.log(res.data);
 
           if (res.data.deletedCount) {
             refetch();
@@ -63,13 +63,17 @@ const MyBookedTicket = () => {
     };
     const res = await axiosSecure.post("/payment-checkout-session", ticketInfo);
 
-    // console.log(res.data.url);
+    // //console.log(res.data.url);
     window.location.assign(res.data.url);
   };
 
   return (
     <div>
-      <h2>Booked Ticket : {bookedTickets.length}</h2>
+      <h1 className="text-3xl font-bold flex  my-5">
+        <div className="w-[5px] mr-5 bg-blue-700"></div>Booked Ticket :{" "}
+        {bookedTickets.length}
+        <div className="w-[5px] ml-5 bg-blue-700"></div>
+      </h1>
       <div className="overflow-x-auto flex  w-full">
         {" "}
         <div className="grid grid-cols-3 max-sm:grid-cols-1 min-w-max  gap-4">

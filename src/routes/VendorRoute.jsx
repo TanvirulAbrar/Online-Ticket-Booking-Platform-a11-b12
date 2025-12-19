@@ -10,7 +10,7 @@ const VendorRoute = ({ children }) => {
   const { role, roleLoading } = useRole();
   // const location = useLocation();
 
-  console.log(role);
+  //console.log(role);
   if (loading || roleLoading) {
     return <Loading></Loading>;
   }

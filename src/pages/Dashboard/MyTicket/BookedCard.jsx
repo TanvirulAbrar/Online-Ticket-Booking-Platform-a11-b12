@@ -33,7 +33,7 @@ const BookedCard = ({ bookedTicket }) => {
     queryKey: ["ticket", bookedTicket._id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/tickets/${bookedTicket.TicketId}`);
-      console.log(res.data);
+      //console.log(res.data);
       return res.data;
     },
   });

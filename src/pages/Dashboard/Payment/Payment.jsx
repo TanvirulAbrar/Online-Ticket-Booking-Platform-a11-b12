@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 const Payment = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
-  console.log(id);
+  //console.log(id);
   const { isLoading, data: bookedTicket } = useQuery({
     queryKey: ["bookedbookedTicket", id],
     queryFn: async () => {
@@ -42,7 +42,7 @@ const Payment = () => {
       .then((a) => (res = a))
       .catch((error) => console.log(error));
 
-    console.log(res.data);
+    //console.log(res.data);
 
     window.location.href = res.data.url;
   };

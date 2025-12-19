@@ -19,13 +19,13 @@ const MyAddedTicket = () => {
     queryFn: async () => {
       const res = await axiosSecure.get(`/tickets?email=${user.email}`);
       const data = res.data;
-      console.log(data);
+      //console.log(data);
       return data;
     },
   });
 
   const handleTicketDelete = (id) => {
-    console.log(id);
+    //console.log(id);
 
     Swal.fire({
       title: "Are you sure?",
@@ -38,7 +38,7 @@ const MyAddedTicket = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/tickets/${id}`).then((res) => {
-          console.log(res.data);
+          //console.log(res.data);
 
           if (res.data.deletedCount) {
             reload();
@@ -70,7 +70,11 @@ const MyAddedTicket = () => {
 
   return (
     <div>
-      <h2>My Added Ticket: {Tickets.length}</h2>
+      <h1 className="text-3xl font-bold flex  my-5">
+        <div className="w-[5px] mr-5 bg-blue-700"></div>My Added Ticket:{" "}
+        {Tickets.length}
+        <div className="w-[5px] ml-5 bg-blue-700"></div>
+      </h1>
       <div className="overflow-x-auto flex  w-full">
         {" "}
         <div className="grid grid-cols-3 max-sm:grid-cols-1 min-w-max  gap-4">

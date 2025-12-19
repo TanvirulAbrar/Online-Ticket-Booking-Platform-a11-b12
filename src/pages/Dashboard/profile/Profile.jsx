@@ -18,7 +18,7 @@ const Profile = () => {
     queryKey: ["userticket", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/tickets`);
-      console.log(res.data);
+      //console.log(res.data);
       const lodedData = res.data;
       const filteredData = [];
       for (const ticket of lodedData) {
@@ -31,7 +31,7 @@ const Profile = () => {
           }
         }
       }
-      console.log(filteredData);
+      //console.log(filteredData);
       return filteredData;
     },
   });
@@ -39,7 +39,7 @@ const Profile = () => {
     queryKey: ["userDb", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/users?email=${user?.email}`);
-      console.log(res.data);
+      //console.log(res.data);
       const lodedData = res.data;
 
       return lodedData;

@@ -21,7 +21,7 @@ const UsersManagement = () => {
     const roleInfo = { role: "admin" };
 
     axiosSecure.patch(`/users/${user._id}/role`, roleInfo).then((res) => {
-      console.log(res.data);
+      //console.log(res.data);
       if (res.data.modifiedCount) {
         refetch();
         Swal.fire({

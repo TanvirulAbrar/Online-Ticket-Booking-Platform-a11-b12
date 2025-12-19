@@ -21,7 +21,12 @@ const RequestBooking = () => {
 
   return (
     <div>
-      <h2 className="text-5xl">RequestBooking {bookedTicket.length}</h2>
+      <h1 className="text-3xl font-bold flex  my-5">
+        <div className="w-[5px] mr-5 bg-blue-700"></div>RequestBooking-
+        {bookedTicket.length}
+        <div className="w-[5px] ml-5 bg-blue-700"></div>
+      </h1>
+
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           {/* head */}

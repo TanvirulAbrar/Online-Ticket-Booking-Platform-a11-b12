@@ -21,7 +21,7 @@ const Adds = () => {
       const res = await axiosSecure.get(
         `/tickets?advertise=added&state=approved`
       );
-      console.log(res.data);
+      //console.log(res.data);
       return res.data;
     },
   });
@@ -34,7 +34,7 @@ const Adds = () => {
         <div className="w-[5px] ml-5 bg-blue-700"></div>
       </h1>
 
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-3 max-sm:grid-cols-1 max-md:grid-cols-2 gap-5">
         {" "}
         {/* 1 */}
         {tickets.map((ticket) => {

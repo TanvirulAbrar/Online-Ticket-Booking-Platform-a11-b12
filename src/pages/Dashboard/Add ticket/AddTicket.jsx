@@ -17,6 +17,7 @@ const AddTicket = () => {
     "TV",
     "VIP Cabin",
     "WiFi",
+    "Breakfast",
   ];
   const axiosSecure = useAxiosSecure();
   const handleSubmit = (e) => {
@@ -29,16 +30,41 @@ const AddTicket = () => {
     }
     let perksSelected = [];
     const AC = e.target.AC.checked;
+    AC && perksSelected.push("AC");
+
+    const Cabin = e.target.Cabin.checked;
+    Cabin && perksSelected.push("Cabin");
+
+    const Food = e.target.Food.checked;
+    Food && perksSelected.push("Food");
+
+    const Luggage = e.target.Luggage.checked;
+    Luggage && perksSelected.push("Luggage");
+
+    const Meal = e.target.Meal.checked;
+    Meal && perksSelected.push("Meal");
+
+    const Sleeper = e.target.Sleeper.checked;
+    Sleeper && perksSelected.push("Sleeper");
+
+    const Snacks = e.target.Snacks.checked;
+    Snacks && perksSelected.push("Snacks");
+
+    const TV = e.target.TV.checked;
+    TV && perksSelected.push("TV");
+
+    const VIPCabin = e.target["VIP Cabin"].checked;
+    VIPCabin && perksSelected.push("VIP Cabin");
 
     const WiFi = e.target.WiFi.checked;
+    WiFi && perksSelected.push("WiFi");
+
     const Breakfast = e.target.Breakfast.checked;
+    Breakfast && perksSelected.push("Breakfast");
+
     const img = e.target.img.files[0];
     const formData = new FormData();
     formData.append("image", img);
-
-    AC && perksSelected.push("AC");
-    WiFi && perksSelected.push("WiFi");
-    Breakfast && perksSelected.push("Breakfast");
 
     const image_API_URL = `https://api.imgbb.com/1/upload?key=${
       import.meta.env.VITE_image_host_key
@@ -61,14 +87,12 @@ const AddTicket = () => {
         email: e.target.email.value,
       };
 
-      console.log(photoURL);
+      //console.log(photoURL);
       axiosSecure
         .post("/tickets", ticket)
         .then((res) => {
-          if (res.data.insertedId) {
-            console.log("user created in the database");
-            toast.success("added");
-          }
+          //console.log("user created in the database");
+          toast.success("added");
         })
         .catch((error) => console.log(error));
     });
@@ -206,7 +230,7 @@ const AddTicket = () => {
 
       <div className="mb-4">
         <label className="block font-semibold mb-1">Vendor Name</label>
-        <div className="">{user?.name}</div>
+        <div className="">{user?.displayName}</div>
       </div>
 
       <div className="mb-6">

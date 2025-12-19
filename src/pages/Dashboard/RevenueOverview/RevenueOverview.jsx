@@ -17,6 +17,7 @@ const RevenueOverview = () => {
   useEffect(() => {
     axiosSecure.get(`/revenues?email=${user?.email}`).then((res) => {
       setrevenue(res.data);
+      console.log(res.data);
     });
   }, [user]);
 

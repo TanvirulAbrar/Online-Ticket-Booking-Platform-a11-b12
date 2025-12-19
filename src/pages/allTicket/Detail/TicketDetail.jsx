@@ -48,7 +48,7 @@ const TicketDetail = () => {
     queryKey: ["ticket", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/tickets/${id}`);
-      console.log(res.data);
+      //console.log(res.data);
       return res.data;
     },
   });
@@ -59,7 +59,7 @@ const TicketDetail = () => {
       const res = await axiosSecure.get(
         `/booked-tickets?TicketId=${ticket._id}&email=${user.email}`
       );
-      console.log("from detail", res.data);
+      //console.log("from detail", res.data);
       return res.data;
     },
   });
@@ -134,7 +134,7 @@ const TicketDetail = () => {
     if (bookedQuantity > ticket.quantity && !isbooked) {
       return toast.error("quantity is more than available");
     }
-    console.log(user);
+    //console.log(user);
     // let quantity = ticket.quantity;
     // let booked = [];
 
@@ -166,8 +166,8 @@ const TicketDetail = () => {
           .patch(`/booked-tickets/${bookedTicket[0]._id}`, newbookedTicket)
           .then((res) => {
             const data = res.data;
-            console.log("add c", data);
-            console.log("Submitted Data:", newbookedTicket);
+            //console.log("add c", data);
+            ////console.log("Submitted Data:", newbookedTicket);
 
             if (isbooked) {
               toast("canceled successfully");
@@ -186,8 +186,8 @@ const TicketDetail = () => {
           .post(`/booked-tickets`, newbookedTicket)
           .then((res) => {
             const data = res.data;
-            console.log("add c", data);
-            console.log("Submitted Data:", newbookedTicket);
+            //console.log("add c", data);
+            //console.log("Submitted Data:", newbookedTicket);
 
             toast.success(" booked successfully! 2");
 
@@ -203,7 +203,7 @@ const TicketDetail = () => {
         .delete(`/booked-tickets/${bookedTicket[0]._id}`)
         .then((res) => {
           const data = res.data;
-          console.log("add c", data);
+          //console.log("add c", data);
 
           toast("canceled successfully 3");
           setisbooked(false);

@@ -76,11 +76,7 @@ export default function RegisterForm() {
   };
   return (
     <div className="flex bg-white max-w-[1600px]">
-      <div className=" bg-[url('/rm222batch5-kul-03.jpg')] bg-cover bg-center w-full ">
-        <p className="mx-auto p-7 text-center text-[#006f8e] text-8xl">
-          Welcome
-        </p>
-      </div>
+      <div className=" bg-[url('/rm222batch5-kul-03.jpg')] max-sm:hidden bg-cover bg-center w-full "></div>
       <form
         className="w-full max-w-md mx-auto p-8 flex flex-col gap-4"
         onSubmit={handleSubmit(handleRegistration)}

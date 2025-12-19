@@ -14,7 +14,7 @@ const SocialLogin = () => {
     event.preventDefault();
     signInGoogle()
       .then((result) => {
-        console.log(result.user);
+        //console.log(result.user);
 
         // create user in the database
         const userInfo = {
@@ -25,7 +25,7 @@ const SocialLogin = () => {
 
         axiosSecure.post("/users", userInfo).then((res) => {
           toast("login successful");
-          console.log("user data has been stored", res.data);
+          //console.log("user data has been stored", res.data);
           navigate(location.state || "/");
         });
       })

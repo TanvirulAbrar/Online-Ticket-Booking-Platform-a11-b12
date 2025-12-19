@@ -19,13 +19,11 @@ const ManageUser = () => {
 
   return (
     <div>
-      <h2 className="text-4xl font-semibold text-gray-700 flex items-center gap-2">
-        Manage Users
-        <span className="px-3 py-1 text-xl rounded-full bg-blue-100 text-blue-600">
-          {users.length}
-        </span>
-      </h2>
-
+      <h1 className="text-3xl font-bold flex  my-5">
+        <div className="w-[5px] mr-5 bg-blue-700"></div> Manage Users{" "}
+        {users.length}
+        <div className="w-[5px] ml-5 bg-blue-700"></div>
+      </h1>
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           {/* head */}
