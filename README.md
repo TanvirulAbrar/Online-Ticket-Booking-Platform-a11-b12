@@ -3,6 +3,7 @@
 A full-stack ticket booking platform where users can browse tickets, request bookings, vendors manage ticket requests, and admins oversee the system with revenue insights.
 
 ---
+live link: https://ticketzone-a11-b12-tan12345.netlify.app/
 
 ## 🚀 Features
 
