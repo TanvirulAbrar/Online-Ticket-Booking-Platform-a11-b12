@@ -151,14 +151,13 @@ The application is built with role-based access control to ensure secure and org
    node index.js
    
 Make sure you have nodemon installed globally or as a dev dependency.
+
 5. copy paste the url to browser
    ```bash
    http://localhost:3000
 
 6. 🔗 Connect Frontend with Backend
    Make sure your frontend API URLs point to the local server during development, e.g.:
-
-
    ```bash
    http://localhost:3000/
 
