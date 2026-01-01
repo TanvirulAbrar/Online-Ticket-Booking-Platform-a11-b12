@@ -150,7 +150,7 @@ The application is built with role-based access control to ensure secure and org
    ```bash
    node index.js
    
-   Make sure you have nodemon installed globally or as a dev dependency.
+  Make sure you have nodemon installed globally or as a dev dependency.
 5. copy paste the url to browser
    ```bash
    http://localhost:3000
