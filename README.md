@@ -124,7 +124,6 @@ The application is built with role-based access control to ensure secure and org
 
    Firebase configuration keys
 
-   MongoDB connection URI
 
 4. Start the development server:
    ```bash
@@ -143,7 +142,7 @@ The application is built with role-based access control to ensure secure and org
    Create a .env file in the server root and add the following variables:
    MONGODB_URI=your_mongodb_connection_string
    FIREBASE_API_KEY=your_firebase_api_key
-   JWT_SECRET=your_jwt_secret_key
+   URI=MongoDB connection URI
    IMGBB_API_KEY=your_imgbb_api_key
    Adjust keys according to your project needs.
 
@@ -158,7 +157,7 @@ The application is built with role-based access control to ensure secure and org
    
 You should see a success message or a JSON response from your API.
 
-5. 🔗 Connect Frontend with Backend
+6. 🔗 Connect Frontend with Backend
    Make sure your frontend API URLs point to the local server during development, e.g.:
 
 
