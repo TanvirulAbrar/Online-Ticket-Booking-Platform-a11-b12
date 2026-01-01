@@ -131,9 +131,9 @@ The application is built with role-based access control to ensure secure and org
    npm run dev
 ## 🖥️ Server Side – Run Locally
 
-### 1. Clone the server repository
-    ```bash
-    git clone <SERVER_REPOSITORY_URL>
+ 1. Clone the server repository
+      ```bash
+      git clone <SERVER_REPOSITORY_URL>
 
 2. Install server dependencies
    ```bash
