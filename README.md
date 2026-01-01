@@ -61,8 +61,12 @@ The application is built with role-based access control to ensure secure and org
   - Rejects → **Rejected**
 
 ---
+## 💱 Payment method
+- User can pay with stripe.
 
-## 💱 Currency
+---
+
+## 💱 Currency 
 - All ticket prices and revenue values are calculated and displayed in **Bangladeshi Taka (BDT)**.
 
 ---
