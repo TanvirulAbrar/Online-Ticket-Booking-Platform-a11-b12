@@ -9,11 +9,15 @@ import { ToastContainer } from "react-toastify";
 
 const MainLayout = () => {
   return (
-    <div className="max-w-7xl mx-auto">
-      <NavBar></NavBar>
-      <Outlet></Outlet>
-      {/* <ToastContainer /> */}
-      <Footer></Footer>
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <div className="max-w-7xl mx-auto">
+        <NavBar></NavBar>
+        {/* Spacer to offset fixed navbar height */}
+        <div className="h-16" aria-hidden="true" />
+        <Outlet></Outlet>
+        <ToastContainer />
+        <Footer></Footer>
+      </div>
     </div>
   );
 };

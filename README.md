@@ -1,89 +1,79 @@
 # 🎫 Ticket Booking Web Application
 
-A full-stack ticket booking platform where users can browse tickets, request bookings, vendors manage ticket requests, and admins oversee the system with revenue insights.
+## 📄 Project Description
+A full-stack ticket booking platform where users can browse and request tickets, vendors manage ticket listings and booking requests, and admins oversee the entire system with revenue insights and analytics dashboards.  
+The application is built with role-based access control to ensure secure and organized workflows.
+
+🌍 **Live Project:**  
+🔗 https://ticketzone-a11-b12-tan12345.netlify.app/
 
 ---
 
-## 🚀 Features
+## ✨ Core Features
 
 ### 👤 User
-
 - Register & login
 - Browse available tickets
 - Search tickets by **From → To** location
-- Request to book tickets
-- View booked tickets with status:
-
+- Request ticket bookings
+- View booking status:
   - Requested
   - Approved
   - Rejected
-
 - Manage profile information
 
----
-
 ### 🧑‍💼 Vendor
-
 - Add tickets with:
-
   - From location
   - To location
   - Price
   - Available quantity
-  - Perks (optional)
-
+  - Optional perks
 - View booking requests
-- Approve or reject booking requests
-- View ticket status clearly in dashboard
-
----
+- Approve or reject bookings
+- Track ticket status from vendor dashboard
 
 ### 🛡️ Admin
-
 - View all users, vendors, and tickets
 - Approve or block vendors
 - Monitor platform performance
 - Revenue overview dashboard:
-
-  - Total Revenue
-  - Total Tickets Sold
-  - Total Tickets Added
-
-- Interactive charts using **Recharts**
+  - Total revenue
+  - Total tickets sold
+  - Total tickets added
+- Interactive analytics using charts
 
 ---
 
 ## 📊 Dashboard & Analytics
-
-- Revenue data visualized using:
-
-  - Radial Bar Charts
-  - Pie Charts
-
+- Revenue data visualization using:
+  - Pie charts
+  - Radial bar charts
 - Real-time data fetched from backend APIs
+- Clear UI indicators for system status
 
 ---
 
-## 🧾 Ticket Status Flow
-
+## 🧾 Ticket Booking Flow
 - User submits booking → **Requested**
 - Vendor reviews request:
-
   - Approves → **Approved**
   - Rejects → **Rejected**
 
 ---
-
-## 💱 Currency
-
-- All prices and revenue amounts are calculated and displayed in **Bangladeshi Taka (BDT)**.
+## 💱 Payment method
+- User can pay with stripe.
 
 ---
 
-## 🛠️ Tech Stack
+## 💱 Currency 
+- All ticket prices and revenue values are calculated and displayed in **Bangladeshi Taka (BDT)**.
+
+---
+
+## 🛠️ Technologies Used
 
 ### Frontend
-
 - React
 - React Router
 - Tailwind CSS
@@ -91,33 +81,97 @@ A full-stack ticket booking platform where users can browse tickets, request boo
 - Axios
 
 ### Backend
-
 - Node.js
 - Express.js
 - MongoDB
-- FB Authentication
+- Firebase Authentication
+
+---
+
+## 📦 Main Dependencies
+- react
+- react-router-dom
+- axios
+- recharts
+- firebase
+- express
+- mongoose
+- cors
+- dotenv
 
 ---
 
 ## 🔐 Authentication & Authorization
-
-- Role-based access:
-
+- Role-based authentication:
   - User
   - Vendor
   - Admin
-
 - Protected routes
 - Secure API endpoints
 
-## 📌 Notes
-
-- Location inputs are flexible but must be meaningful and not empty
-- Users cannot delete approved bookings
-- Color coding in dashboards is used for better UI clarity (optional enhancement)
-
 ---
 
-## 📄 License
+## 🚀 How to Run Locally
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/TanvirulAbrar/Online-Ticket-Booking-Platform-a11-b12.git
+   
+2. Install dependencies:
+   ```bash
+   npm install
 
-This project is created for educational and demonstration purposes.
+3. Create a .env file and add:
+
+   Firebase configuration keys
+
+
+4. Start the development server:
+   ```bash
+   npm run dev
+## 🖥️ Server Side – Run Locally
+
+ 1. Clone the server repository
+      ```bash
+      git clone <SERVER_REPOSITORY_URL>
+
+2. Install server dependencies
+   ```bash
+   npm install
+   
+3. Create environment variables
+   -Create a .env file in the server root and add the following variables:
+    - MONGODB_URI=your_mongodb_connection_string 
+    - FIREBASE_API_KEY=your_firebase_api_key 
+    - URI=MongoDB connection URI 
+    - IMGBB_API_KEY=your_imgbb_api_key 
+    - Adjust keys according to your project needs. 
+
+5. Start the server with nodemon (recommended for development)
+   ```bash
+   node index.js
+   
+Make sure you have nodemon installed globally or as a dev dependency.
+
+5. copy paste the url to browser
+   ```bash
+   http://localhost:3000
+
+You should see a success message or a JSON response from your API.
+
+6. 🔗 Connect Frontend with Backend
+   Make sure your frontend API URLs point to the local server during development, e.g.:
+   ```bash
+   http://localhost:3000/
+
+## ⚠️ Notes
+   Use MongoDB Atlas or local MongoDB for your database.
+
+   Never commit your .env file to public repositories.
+
+   Ensure CORS is enabled on the backend for your frontend origin.
+
+
+
+## 📸 Screenshot
+
+   Not added yet.

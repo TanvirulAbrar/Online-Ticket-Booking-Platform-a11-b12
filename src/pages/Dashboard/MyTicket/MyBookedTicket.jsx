@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FiEdit } from "react-icons/fi";
@@ -8,12 +7,13 @@ import Swal from "sweetalert2";
 import { Link } from "react-router";
 import TicketCard from "../../allTicket/card/TicketCard";
 import BookedCard from "./BookedCard";
+import { TicketLoading } from "../../Shared/Loading/Loading";
 
 const MyBookedTicket = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data: bookedTickets = [], refetch } = useQuery({
+  const { data: bookedTickets = [], refetch, isLoading } = useQuery({
     queryKey: ["bookedTickets", user.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/booked-tickets?email=${user.email}`);
@@ -22,6 +22,10 @@ const MyBookedTicket = () => {
       return data;
     },
   });
+
+  if (isLoading) {
+    return <TicketLoading />;
+  }
 
   const handleTicketDelete = (id) => {
     //console.log(id);
@@ -68,15 +72,25 @@ const MyBookedTicket = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold flex  my-5">
-        <div className="w-[5px] mr-5 bg-blue-700"></div>Booked Ticket :{" "}
-        {bookedTickets.length}
-        <div className="w-[5px] ml-5 bg-blue-700"></div>
-      </h1>
-      <div className="overflow-x-auto flex  w-full">
-        {" "}
-        <div className="grid grid-cols-3 max-sm:grid-cols-1 min-w-max  gap-4">
+    <div className="p-6">
+      {/* Modern Header */}
+      <div className="mb-8">
+        <div className="flex items-center gap-4 mb-2">
+          <div className="w-1 h-8 bg-blue-500 rounded-full"></div>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            My Booked Tickets
+          </h1>
+          <div className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium">
+            {bookedTickets.length} Bookings
+          </div>
+        </div>
+        <p className="text-gray-600 dark:text-gray-400 ml-8">
+          View and manage your ticket bookings and payment status
+        </p>
+      </div>
+
+      <div className="overflow-x-auto flex w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 w-full">
           {bookedTickets.map((ticket, i) => {
             return (
               <BookedCard key={i + "ti"} bookedTicket={ticket}></BookedCard>

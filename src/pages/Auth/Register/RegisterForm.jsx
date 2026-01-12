@@ -1,4 +1,3 @@
-import { Mail, Lock, Eye, EyeOff, Apple, Chrome, Image } from "lucide-react";
 import { useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth";
@@ -22,6 +21,7 @@ export default function RegisterForm() {
   const handelEye = () => {
     setisEye(!isEye);
   };
+
   const handleRegistration = (data, event) => {
     event.preventDefault();
     const profileImg = data.photo[0];
@@ -32,8 +32,6 @@ export default function RegisterForm() {
         const formData = new FormData();
         formData.append("image", profileImg);
 
-        // console.log(formData);
-        //
         const image_API_URL = `https://api.imgbb.com/1/upload?key=${
           import.meta.env.VITE_image_host_key
         }`;
@@ -59,8 +57,7 @@ export default function RegisterForm() {
 
           updateUserProfile(userProfile)
             .then(() => {
-              toast("login successful");
-              // console.log('user profile updated done.')
+              toast("Registration successful");
               navigate(location.state || "/");
             })
             .catch((error) => {
@@ -74,132 +71,163 @@ export default function RegisterForm() {
         toast.error("" + error);
       });
   };
+
   return (
-    <div className="flex bg-white max-w-[1600px]">
-      <div className=" bg-[url('/rm222batch5-kul-03.jpg')] max-sm:hidden bg-cover bg-center w-full "></div>
-      <form
-        className="w-full max-w-md mx-auto p-8 flex flex-col gap-4"
-        onSubmit={handleSubmit(handleRegistration)}
-      >
-        <div className="flex flex-col gap-1">
-          <label className="font-semibold text-gray-800">Name</label>
-          <div className="flex items-center h-12 border border-gray-300 rounded-xl px-3 focus-within:border-blue-500 transition">
-            <Mail size={20} className="text-gray-500" />
-            <input
-              type="name"
-              placeholder="Enter your name"
-              className="w-full h-full ml-3 outline-none bg-transparent"
-              {...register("name", { required: true })}
-            />
-          </div>
-        </div>
-        {errors.name?.type === "required" && (
-          <p className="text-red-500">Name is required.</p>
-        )}
-        <div className="flex items-center h-12 border border-gray-300 rounded-xl px-3 focus-within:border-blue-500 transition">
-          {" "}
-          <Image size={20} className="text-gray-500" />
+    <form className="space-y-5" onSubmit={handleSubmit(handleRegistration)}>
+      {/* Name */}
+      <div>
+        <label
+          className="block text-sm font-medium mb-1.5 text-slate-700 dark:text-slate-300"
+          htmlFor="name"
+        >
+          Name
+        </label>
+        <div className="relative">
+          <span className="material-icons-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">
+            person
+          </span>
           <input
-            type="file"
-            {...register("photo", { required: true })}
-            className="file-input"
-            placeholder="Your Photo"
+            className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+            id="name"
+            placeholder="Enter your full name"
+            type="text"
+            {...register("name", { required: true })}
           />
         </div>
         {errors.name?.type === "required" && (
-          <p className="text-red-500">Photo is required.</p>
+          <p className="text-red-500 text-sm mt-1">Name is required.</p>
         )}
+      </div>
 
-        {/* Email */}
-        <div className="flex flex-col gap-1">
-          <label className="font-semibold text-gray-800">Email</label>
-          <div className="flex items-center h-12 border border-gray-300 rounded-xl px-3 focus-within:border-blue-500 transition">
-            <Mail size={20} className="text-gray-500" />
+      {/* Profile Image */}
+      <div>
+        <label
+          className="block text-sm font-medium mb-1.5 text-slate-700 dark:text-slate-300"
+          htmlFor="profile_image"
+        >
+          Profile Image
+        </label>
+        <div className="flex items-center w-full">
+          <label className="w-full flex flex-col items-center px-4 py-3 bg-white dark:bg-slate-800 text-slate-400 rounded-xl border border-slate-200 dark:border-slate-700 border-dashed cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-all">
+            <div className="flex items-center gap-2">
+              <span className="material-icons-outlined">image</span>
+              <span className="text-sm">Choose profile photo</span>
+            </div>
             <input
-              type="email"
-              placeholder="Enter your Email"
-              className="w-full h-full ml-3 outline-none bg-transparent"
-              {...register("email", { required: true })}
+              className="hidden"
+              type="file"
+              {...register("photo", { required: true })}
             />
-          </div>
+          </label>
+        </div>
+        {errors.photo?.type === "required" && (
+          <p className="text-red-500 text-sm mt-1">Photo is required.</p>
+        )}
+      </div>
+
+      {/* Email */}
+      <div>
+        <label
+          className="block text-sm font-medium mb-1.5 text-slate-700 dark:text-slate-300"
+          htmlFor="email"
+        >
+          Email Address
+        </label>
+        <div className="relative">
+          <span className="material-icons-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">
+            mail
+          </span>
+          <input
+            className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-blue-50/50 dark:bg-blue-900/10 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+            id="email"
+            placeholder="m@m21.com"
+            type="email"
+            {...register("email", { required: true })}
+          />
         </div>
         {errors.email?.type === "required" && (
-          <p className="text-red-500">Email is required.</p>
+          <p className="text-red-500 text-sm mt-1">Email is required.</p>
         )}
-        {/* Password */}
-        <div className="flex flex-col gap-1">
-          <label className="font-semibold text-gray-800">Password</label>
-          <div className="flex items-center h-12 border border-gray-300 rounded-xl px-3 focus-within:border-blue-500 transition">
-            <Lock size={20} className="text-gray-500" />
-            <input
-              type={isEye ? "text" : "password"}
-              placeholder="Enter your Password"
-              className="w-full ml-3 outline-none bg-transparent"
-              {...register("password", {
-                required: true,
-                minLength: 6,
-                pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/,
-              })}
-            />
-            <Eye onClick={handelEye} className="text-gray-500" size={20} />
-          </div>
+      </div>
+
+      {/* Password */}
+      <div>
+        <label
+          className="block text-sm font-medium mb-1.5 text-slate-700 dark:text-slate-300"
+          htmlFor="password"
+        >
+          Password
+        </label>
+        <div className="relative">
+          <span className="material-icons-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">
+            lock
+          </span>
+          <input
+            className="w-full pl-10 pr-10 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-blue-50/50 dark:bg-blue-900/10 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+            id="password"
+            placeholder="••••••••"
+            type={isEye ? "text" : "password"}
+            {...register("password", {
+              required: true,
+              minLength: 6,
+              pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/,
+            })}
+          />
+          <button
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+            type="button"
+            onClick={handelEye}
+          >
+            <span className="material-icons-outlined text-lg">visibility</span>
+          </button>
         </div>
         {errors.password?.type === "required" && (
-          <p className="text-red-500">Password is required.</p>
+          <p className="text-red-500 text-sm mt-1">Password is required.</p>
         )}
         {errors.password?.type === "minLength" && (
-          <p className="text-red-500">
+          <p className="text-red-500 text-sm mt-1">
             Password must be 6 characters or longer
           </p>
         )}
         {errors.password?.type === "pattern" && (
-          <p className="text-red-500">
+          <p className="text-red-500 text-sm mt-1">
             Password must have at least one uppercase, at least one lowercase,
             at least one number, and at least one special characters
           </p>
         )}
-        <div className="flex items-center justify-between">
-          <label className="flex items-center gap-2 text-sm">
-            <input type="checkbox" className="checkbox checkbox-sm" />
+      </div>
+
+      <div className="flex items-center justify-between text-sm">
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input
+            className="rounded text-primary border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-offset-0"
+            type="checkbox"
+          />
+          <span className="text-slate-600 dark:text-slate-400">
             Remember me
-          </label>
+          </span>
+        </label>
+        <a className="text-blue-600 hover:text-blue-700 font-medium" href="#">
+          Forgot password?
+        </a>
+      </div>
 
-          <button type="button" className="text-blue-600 text-sm font-medium">
-            Forgot password?
-          </button>
-        </div>
+      <button
+        className="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold py-3.5 rounded-xl hover:opacity-90 transition-opacity flex items-center justify-center gap-2 mt-4 shadow-lg"
+        type="submit"
+      >
+        Sign Up
+      </button>
 
-        {/* Sign in button */}
-        <button className="btn w-full h-12 bg-black text-white rounded-xl hover:bg-neutral-800">
-          Sign In
-        </button>
+      <div className="relative flex items-center py-4">
+        <div className="flex-grow border-t border-slate-200 dark:border-slate-700"></div>
+        <span className="flex-shrink mx-4 text-xs text-slate-400 uppercase tracking-wider">
+          Or With
+        </span>
+        <div className="flex-grow border-t border-slate-200 dark:border-slate-700"></div>
+      </div>
 
-        {/* Signup */}
-        <p className="text-center text-sm">
-          have an account?{" "}
-          <NavLink to={"/login"}>
-            <span className="text-blue-600 font-medium cursor-pointer">
-              Login
-            </span>
-          </NavLink>
-        </p>
-
-        <p className="text-center text-sm text-gray-500 my-1">Or With</p>
-
-        {/* Social Buttons */}
-        {/* <div className="flex items-center gap-3 w-full">
-          <button className="btn w-1/2 h-12 rounded-xl border border-gray-300 hover:border-blue-500 bg-white flex items-center justify-center gap-2">
-            <Chrome size={20} />
-            Google
-          </button>
-
-          <button className="btn w-1/2 h-12 rounded-xl border border-gray-300 hover:border-blue-500 bg-white flex items-center justify-center gap-2">
-            <Apple size={20} />
-            Apple
-          </button>
-        </div> */}
-        <SocialLogin></SocialLogin>
-      </form>
-    </div>
+      <SocialLogin />
+    </form>
   );
 }

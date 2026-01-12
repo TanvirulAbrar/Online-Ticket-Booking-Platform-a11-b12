@@ -1,12 +1,12 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import MainLayout from "../layouts/MainLayout";
 import Login from "../pages/Auth/Login/Login";
 import Register from "../pages/Auth/Register/Register";
-import { Eraser } from "lucide-react";
 import ErrorPage from "../pages/Shared/404/ErrorPage";
 import Loading from "../pages/Shared/Loading/Loading";
 import Home from "../pages/Home/Home/Home";
 import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
+import DashboardOverview from "../pages/Dashboard/Overview/DashboardOverview";
 
 import AlTicket from "../pages/allTicket/AlTicket";
 import TicketDetail from "../pages/allTicket/Detail/TicketDetail";
@@ -27,6 +27,18 @@ import ManageUser from "../pages/Dashboard/Manage User/ManageUser";
 import Advertise from "../pages/Dashboard/Advertise/Advertise";
 import AdminRoute from "./AdminRoute";
 import VendorRoute from "./VendorRoute";
+
+// Additional Content Pages
+import About from "../pages/About/About";
+import Contact from "../pages/Contact/Contact";
+import Blog from "../pages/Blog/Blog";
+import Help from "../pages/Help/Help";
+import Privacy from "../pages/Privacy/Privacy";
+import Terms from "../pages/Terms/Terms";
+import Showcase1 from "../pages/Showcase/Showcase1";
+import Showcase2 from "../pages/Showcase/Showcase2";
+import Showcase3 from "../pages/Showcase/Showcase3";
+import Showcase4 from "../pages/Showcase/Showcase4";
 
 export const router = createBrowserRouter([
   {
@@ -55,10 +67,55 @@ export const router = createBrowserRouter([
       {
         path: "/details/:id",
         element: (
-          <PrivateRoute>
-            <TicketDetail />
-          </PrivateRoute>
+          // <PrivateRoute>
+          <TicketDetail />
+          //</PrivateRoute>
         ),
+      },
+      // Additional Content Pages
+      {
+        path: "/about",
+        Component: About,
+      },
+      {
+        path: "/contact",
+        Component: Contact,
+      },
+      {
+        path: "/blog",
+        Component: Blog,
+      },
+      {
+        path: "/help",
+        Component: Help,
+      },
+      {
+        path: "/privacy",
+        Component: Privacy,
+      },
+      {
+        path: "/terms",
+        Component: Terms,
+      },
+      {
+        path: "/showcase",
+        element: <Navigate to="/showcase/1" replace />,
+      },
+      {
+        path: "/showcase/1",
+        Component: Showcase1,
+      },
+      {
+        path: "/showcase/2",
+        Component: Showcase2,
+      },
+      {
+        path: "/showcase/3",
+        Component: Showcase3,
+      },
+      {
+        path: "/showcase/4",
+        Component: Showcase4,
       },
     ],
   },
@@ -72,7 +129,15 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
+        Component: DashboardOverview,
+      },
+      {
+        path: "/dashboard/profile",
         Component: Profile,
+      },
+      {
+        path: "/dashboard/overview",
+        Component: DashboardOverview,
       },
       {
         path: "/dashboard/my-booked-ticket",

@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { TicketLoading } from "../../Shared/Loading/Loading";
 
 const PaymentHistory = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data: payments = [] } = useQuery({
+  const { data: payments = [], isLoading } = useQuery({
     queryKey: ["payments", user.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/payments?email=${user.email}`);
@@ -15,37 +15,79 @@ const PaymentHistory = () => {
     },
   });
 
+  if (isLoading) {
+    return <TicketLoading />;
+  }
+
   return (
-    <div>
-      <h1 className="text-3xl font-bold flex  my-5">
-        <div className="w-[5px] mr-5 bg-blue-700"></div>Payment History:{" "}
-        {payments.length}
-        <div className="w-[5px] ml-5 bg-blue-700"></div>
-      </h1>
-      <div className="overflow-x-auto">
-        <table className="table table-zebra">
-          {/* head */}
-          <thead>
-            <tr>
-              <th></th>
-              <th>Ticket Title</th>
-              <th>Amount</th>
-              <th>Paid Time</th>
-              <th>Transaction Id</th>
-            </tr>
-          </thead>
-          <tbody>
-            {payments.map((payment, index) => (
-              <tr key={payment._id}>
-                <th>{index + 1}</th>
-                <td>{payment.title}</td>
-                <td>${payment.amount}</td>
-                <td>{payment.paidAt}</td>
-                <td>{payment.transactionId}</td>
+    <div className="p-6">
+      {/* Modern Header */}
+      <div className="mb-8">
+        <div className="flex items-center gap-4 mb-2">
+          <div className="w-1 h-8 bg-blue-500 rounded-full"></div>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            Payment History
+          </h1>
+          <div className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium">
+            {payments.length} Payments
+          </div>
+        </div>
+        <p className="text-gray-600 dark:text-gray-400 ml-8">
+          View all your payment transactions and booking history
+        </p>
+      </div>
+
+      {/* Table Container */}
+      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm transition-colors duration-200">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+                <th className="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">#</th>
+                <th className="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Ticket Title</th>
+                <th className="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-right">Amount</th>
+                <th className="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Paid Time</th>
+                <th className="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Transaction ID</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {payments.map((payment, index) => (
+                <tr key={payment._id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                  <td className="px-6 py-6 text-slate-600 dark:text-slate-400">
+                    {index + 1}
+                  </td>
+                  <td className="px-6 py-6 text-slate-800 dark:text-slate-200 font-medium">
+                    <div className="max-w-xs truncate" title={payment.title}>
+                      {payment.title}
+                    </div>
+                  </td>
+                  <td className="px-6 py-6 text-green-600 dark:text-green-400 font-bold text-right">
+                    ৳{payment.amount}
+                  </td>
+                  <td className="px-6 py-6 text-slate-600 dark:text-slate-400">
+                    {payment.paidAt}
+                  </td>
+                  <td className="px-6 py-6 text-slate-600 dark:text-slate-400 font-mono text-sm">
+                    {payment.transactionId}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <span className="text-sm text-slate-500 dark:text-slate-400">
+            Showing 1 to {Math.min(payments.length, 10)} of {payments.length} results
+          </span>
+          <div className="flex gap-2">
+            <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded text-sm font-medium hover:bg-white dark:hover:bg-slate-700 transition-colors text-slate-600 dark:text-slate-300">
+              Previous
+            </button>
+            <button className="px-4 py-2 bg-blue-600 text-white rounded text-sm font-medium hover:bg-blue-700 transition-colors">
+              Next
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

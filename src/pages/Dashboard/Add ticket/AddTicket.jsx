@@ -1,5 +1,4 @@
 import axios from "axios";
-import React from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
@@ -99,155 +98,189 @@ const AddTicket = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-lg mx-auto p-6 bg-white rounded shadow"
-    >
-      {/* {error && (
-        <div className="bg-red-100 text-red-700 p-2 mb-4 rounded">{error}</div>
-      )} */}
-
-      <div className="mb-4">
-        <label className="block font-semibold mb-1">Ticket Title</label>
-        <input
-          type="text"
-          name="title"
-          //   value={formData.title}
-          //   onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        />
+    <div className="p-6">
+      {/* Modern Header */}
+      <div className="mb-8">
+        <div className="flex items-center gap-4 mb-2">
+          <div className="w-1 h-8 bg-blue-500 rounded-full"></div>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            Add New Ticket
+          </h1>
+          <div className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm font-medium">
+            Create Listing
+          </div>
+        </div>
+        <p className="text-gray-600 dark:text-gray-400 ml-8">
+          Create a new ticket listing for your transport service
+        </p>
       </div>
 
-      <div className="mb-4">
-        <label className="block font-semibold mb-1">From (Location)</label>
-        <input
-          type="text"
-          name="from"
-          //   value={formData.from}
-          //   onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        />
-      </div>
+      {/* Form Container */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
+        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Ticket Title
+              </label>
+              <input
+                type="text"
+                name="title"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                required
+              />
+            </div>
 
-      <div className="mb-4">
-        <label className="block font-semibold mb-1">To (Location)</label>
-        <input
-          type="text"
-          name="to"
-          //   value={formData.to}
-          //   onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        />
-      </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Transport Type
+              </label>
+              <select
+                name="transportType"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                required
+              >
+                <option value="">Select type</option>
+                <option value="Bus">Bus</option>
+                <option value="Train">Train</option>
+                <option value="Launch">Launch</option>
+                <option value="Plane">Plane</option>
+              </select>
+            </div>
+          </div>
 
-      <div className="mb-4">
-        <label className="block font-semibold mb-1">Transport Type</label>
-        <select
-          name="transportType"
-          //   value={formData.transportType}
-          //   onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        >
-          <option value="">Select type</option>
-          <option value="Bus">Bus</option>
-          <option value="Train">Train</option>
-          <option value="Launch">Launch</option>
-          <option value="Plane">Plane</option>
-        </select>
-      </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                From (Location)
+              </label>
+              <input
+                type="text"
+                name="from"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                required
+              />
+            </div>
 
-      <div className="mb-4">
-        <label className="block font-semibold mb-1">Price (per unit)</label>
-        <input
-          type="number"
-          name="price"
-          min="1"
-          //   value={formData.price}
-          //   onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        />
-      </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                To (Location)
+              </label>
+              <input
+                type="text"
+                name="to"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                required
+              />
+            </div>
+          </div>
 
-      <div className="mb-4">
-        <label className="block font-semibold mb-1">Ticket Quantity</label>
-        <input
-          type="number"
-          name="quantity"
-          min="1"
-          //   value={formData.quantity}
-          //   onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        />
-      </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Price (per unit)
+              </label>
+              <input
+                type="number"
+                name="price"
+                min="1"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                required
+              />
+            </div>
 
-      <div className="mb-4">
-        <label className="block font-semibold mb-1">
-          Departure Date & Time
-        </label>
-        <input
-          type="datetime-local"
-          name="departure"
-          //   value={formData.departure}
-          //   onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        />
-      </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Ticket Quantity
+              </label>
+              <input
+                type="number"
+                name="quantity"
+                min="1"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                required
+              />
+            </div>
 
-      <div className="mb-4">
-        <span className="block font-semibold mb-2">Perks</span>
-        {perks.map((perk) => (
-          <label key={perk} className="inline-flex items-center mr-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Departure Date & Time
+              </label>
+              <input
+                type="datetime-local"
+                name="departure"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">
+              Perks & Amenities
+            </label>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {perks.map((perk) => (
+                <label key={perk} className="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name={perk}
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                  <span className="text-sm text-gray-700 dark:text-gray-300">{perk}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Upload Image
+            </label>
             <input
-              type="checkbox"
-              name={perk}
-              // checked={formData.perks[perk]}
-              // onChange={handleChange}
-              className="mr-1"
+              type="file"
+              accept="image/*"
+              name="img"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+              required
             />
-            {perk}
-          </label>
-        ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Vendor Name
+              </label>
+              <div className="px-4 py-3 bg-gray-50 dark:bg-gray-600 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300">
+                {user?.displayName}
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Vendor Email
+              </label>
+              <input 
+                name="email" 
+                type="email" 
+                value={user?.email} 
+                readOnly 
+                className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-600 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300"
+              />
+            </div>
+          </div>
+
+          <div className="pt-6">
+            <button
+              type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            >
+              Add Ticket
+            </button>
+          </div>
+        </form>
       </div>
-
-      <div className="mb-4">
-        <label className="block font-semibold mb-1">Upload Image</label>
-        <input
-          type="file"
-          accept="image/*"
-          name="img"
-          //   onChange={handleFileChange}
-          className="w-full"
-          required
-        />
-      </div>
-
-      <div className="mb-4">
-        <label className="block font-semibold mb-1">Vendor Name</label>
-        <div className="">{user?.displayName}</div>
-      </div>
-
-      <div className="mb-6">
-        <label className="block font-semibold mb-1">Vendor Email</label>
-
-        <input name="email" type="email" value={user?.email} readOnly />
-      </div>
-
-      <button
-        type="submit"
-        // disabled={loading}
-        className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 disabled:bg-blue-400"
-      >
-        Add
-        {/* {loading ? "Adding Ticket..." : "Add Ticket"} */}
-      </button>
-    </form>
+    </div>
   );
 };
 

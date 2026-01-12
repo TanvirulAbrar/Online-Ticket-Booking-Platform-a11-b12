@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import TicketCard from "./card/TicketCard";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Loading from "../Shared/Loading/Loading";
-import { toast } from "react-toastify";
 import { XCircle } from "lucide-react";
 // import { data } from "react-router";
 
@@ -121,194 +120,148 @@ const AlTicket = () => {
     settransportType(e.target.innerText);
   };
   return (
-    <div>
-      <h1 className="text-3xl p-5 font-bold flex  my-5">
-        <div className="w-[5px] mr-5 bg-blue-700"></div> All ticket
-        <div className="w-[5px] ml-5 bg-blue-700"></div>
-      </h1>
-      <div className="flex justify-center content-center items-center max-w-300 mx-auto   py-5">
-        <div className="w-4xl">
-          {" "}
-          <label className="input  w-full">
-            <svg
-              className="h-[1em] opacity-50"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <g
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                strokeWidth="2.5"
-                fill="none"
-                stroke="currentColor"
-              >
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.3-4.3"></path>
-              </g>
-            </svg>
-            {transportType !== "" && (
-              <button
-                onClick={() => settransportType("")}
-                className="btn btn-outline btn-primary"
-              >
-                {transportType}
-                <XCircle></XCircle>
-              </button>
-            )}
-            <input
-              type="search"
-              onChange={(e) => findWithWord(e.target.value.trim())}
-              className="grow"
-              placeholder="Search"
-            />
-          </label>
+    <div className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-200 min-h-screen">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        {/* Page Header */}
+        <div className="mb-8 border-l-4 border-primary pl-4">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">All ticket</h1>
         </div>
-        <div className="w-fit">
-          <details className="dropdown">
-            <summary className="btn m-1">
-              Sort By{" "}
-              <span className="max-[350px]:hidden flex">
-                {" "}
-                {sort ? sort : ""}
-              </span>{" "}
-            </summary>
-            <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-fit  py-2 shadow-sm">
-              <li>
-                <a onClick={(e) => handelsort(e, "price High-Low")}>
-                  price High-Low
-                </a>
-              </li>
-              <li>
-                <a onClick={(e) => handelsort(e, "price Low-High")}>
-                  price Low-High
-                </a>
-              </li>
-            </ul>
-          </details>
-        </div>
-      </div>
-      <div className=" rounded-2xl  shadow-sm mb-5   min-h-16 w-fit mx-auto  px-5">
-        <div className="flex justify-center max-sm:flex-col gap-5 content-center items-center w-fit mx-auto py-5">
-          <div className="w-fit flex justify-center gap-5">
-            {" "}
-            <label className="input w-fit pl-0 overflow-hidden">
-              <div className="text-center items-center h-full font-semibold self-center flex justify-center bg-blue-300 px-5">
-                from
-              </div>
-              <svg
-                className="h-[1em] opacity-50"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <g
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                  strokeWidth="2.5"
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <path d="m21 21-4.3-4.3"></path>
-                </g>
-              </svg>
-              <input
-                type="search"
-                value={from}
-                onChange={(e) => setfrom(e.target.value.trim())}
-                className="grow"
-                placeholder="Search"
+
+        {/* Search and Filter Section */}
+        <div className="space-y-6 mb-12">
+          {/* Main Search and Sort */}
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="relative flex-grow">
+              <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                <span className="material-symbols-outlined text-lg">search</span>
+              </span>
+              <input 
+                className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-primary focus:border-primary" 
+                placeholder="Search" 
+                type="text"
+                onChange={(e) => findWithWord(e.target.value.trim())}
               />
-            </label>
-          </div>
-          <div className="w-fit">
-            {" "}
-            <label className="input  w-fit pl-0 overflow-hidden">
-              <div className="text-center items-center h-full flex justify-center font-semibold self-center bg-blue-300 px-5">
-                to
-              </div>
-              <svg
-                className="h-[1em] opacity-50"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
+            </div>
+            <div className="relative">
+              <select 
+                className="appearance-none flex items-center gap-2 px-6 py-3 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition cursor-pointer pr-10"
+                value={sort}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value === "price High-Low") {
+                    setprice("high");
+                  } else if (value === "price Low-High") {
+                    setprice("low");
+                  }
+                  setsort(value);
+                  setpage(0);
+                }}
               >
-                <g
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                  strokeWidth="2.5"
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <path d="m21 21-4.3-4.3"></path>
-                </g>
-              </svg>
-              <input
-                type="search"
-                value={to}
-                onChange={(e) => setto(e.target.value.trim())}
-                className="grow"
-                placeholder="Search"
-              />
-            </label>
+                <option value="">Sort By</option>
+                <option value="price High-Low">Price High-Low</option>
+                <option value="price Low-High">Price Low-High</option>
+              </select>
+              <span className="material-symbols-outlined absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">expand_more</span>
+            </div>
           </div>
 
-          {from !== "" && to !== "" && (
-            <div className="">
-              <button
-                onClick={handelFilter}
-                className="btn btn-outline btn-primary"
-              >
-                Apply
-              </button>
+          {/* From/To Search */}
+          <div className="flex flex-col md:flex-row items-center gap-4">
+            <div className="flex flex-grow w-full border border-gray-300 dark:border-gray-700 rounded-lg overflow-hidden">
+              <div className="flex items-center bg-primary text-white px-4 py-3 font-medium min-w-[80px] justify-center">from</div>
+              <input 
+                className="block w-full px-4 py-3 bg-white dark:bg-gray-800 border-none focus:ring-0 text-gray-900 dark:text-white" 
+                placeholder="Search" 
+                type="text"
+                value={from}
+                onChange={(e) => setfrom(e.target.value.trim())}
+              />
             </div>
-          )}
-          <div className="">
-            <button
+            <div className="flex flex-grow w-full border border-gray-300 dark:border-gray-700 rounded-lg overflow-hidden">
+              <div className="flex items-center bg-primary text-white px-4 py-3 font-medium min-w-[80px] justify-center">to</div>
+              <input 
+                className="block w-full px-4 py-3 bg-white dark:bg-gray-800 border-none focus:ring-0 text-gray-900 dark:text-white" 
+                placeholder="Search" 
+                type="text"
+                value={to}
+                onChange={(e) => setto(e.target.value.trim())}
+              />
+            </div>
+            <button 
+              className="w-full md:w-auto px-8 py-3 bg-blue-50 dark:bg-blue-900/20 text-primary border border-primary rounded-lg font-semibold hover:bg-primary hover:text-white transition-all"
               onClick={(e) => {
                 setfrom("");
                 setto("");
                 handelFilterReset(e);
               }}
-              className="btn btn-outline btn-primary"
             >
               reset
             </button>
           </div>
+
+          {/* Transport Type Filter */}
+          <div className="flex flex-wrap justify-center gap-3">
+            {category.map((type, i) => (
+              <button 
+                key={"ac" + i}
+                className={`px-6 py-2 border border-primary rounded-md font-medium transition-colors ${
+                  transportType === type 
+                    ? 'bg-primary text-white' 
+                    : 'text-primary hover:bg-primary hover:text-white'
+                }`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  settransportType(type);
+                  setpage(0);
+                }}
+              >
+                {type}
+              </button>
+            ))}
+            {transportType && (
+              <button
+                onClick={() => {
+                  settransportType("");
+                  setpage(0);
+                }}
+                className="px-4 py-2 bg-red-50 dark:bg-red-900/20 text-red-600 border border-red-300 rounded-md font-medium hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors flex items-center gap-2"
+              >
+                Clear: {transportType}
+                <XCircle className="w-4 h-4" />
+              </button>
+            )}
+          </div>
         </div>
-      </div>
-      <div className="max-w-300 mb-5 justify-center flex overflow-scroll  ">
-        {category.map((a, i) => (
-          <button
-            onClick={(e) => handelsortb(e)}
-            key={"ac" + i}
-            className="btn  btn-outline btn-primary mr-1.5"
-          >
-            {a}
-          </button>
-        ))}
-        {/* <button className="btn btn-outline btn-primary">Primary</button> */}
-      </div>
-      <div className="grid grid-cols-3 mx-auto w-fit max-sm:grid-cols-1 gap-5">
-        {filterdata.map((ticket, i) => {
-          return <TicketCard key={i + "ti"} ticket={ticket}></TicketCard>;
-        })}
-      </div>
-      <div className="flex flex-wrap justify-center p-5 gap-5">
-        {pages.map((i) => {
-          return (
-            <div
-              onClick={(e) => {
-                setpage(Number(e.target.innerText) - 1);
-                handelPageLoad(e, Number(e.target.innerText) - 1);
-              }}
-              className="btn btn-square"
-              key={"page" + i}
-            >
-              {i}
-            </div>
-          );
-        })}
-      </div>
+
+        {/* Tickets Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {filterdata.map((ticket, i) => {
+            return <TicketCard key={i + "ti"} ticket={ticket}></TicketCard>;
+          })}
+        </div>
+
+        {/* Pagination */}
+        <div className="flex justify-center items-center gap-2 mt-12">
+          {pages.map((pageNum) => {
+            return (
+              <button
+                key={"page" + pageNum}
+                className={`w-10 h-10 flex items-center justify-center rounded-md border transition-colors ${
+                  page === pageNum - 1
+                    ? 'bg-primary text-white border-primary'
+                    : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:bg-primary hover:text-white'
+                }`}
+                onClick={(e) => {
+                  setpage(pageNum - 1);
+                  handelPageLoad(e, pageNum - 1);
+                }}
+              >
+                {pageNum}
+              </button>
+            );
+          })}
+        </div>
+      </main>
     </div>
   );
 };

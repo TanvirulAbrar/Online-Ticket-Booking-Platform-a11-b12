@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams, useLocation } from "react-router";
 import { toast } from "react-toastify";
 
 import {
@@ -12,7 +12,6 @@ import {
   Clock,
   Users,
   Ticket,
-  BadgeCheck,
   ChevronRightCircle,
   CheckCircle,
   Tag,
@@ -24,10 +23,10 @@ import Loading from "../../Shared/Loading/Loading";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
-import Payment from "../../Dashboard/Payment/Payment";
 
 const TicketDetail = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { id } = useParams();
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
@@ -39,6 +38,21 @@ const TicketDetail = () => {
   const handelQuntity = (event) => {
     event.preventDefault();
     setbookedQuantity(event.target.value);
+  };
+
+  // Handle authentication check before booking
+  const handleAuthCheck = () => {
+    if (!user) {
+      // Save current location to redirect back after login
+      navigate('/login', { 
+        state: { 
+          from: location.pathname,
+          message: 'Please login to book tickets' 
+        } 
+      });
+      return false;
+    }
+    return true;
   };
   const {
     isLoading,
@@ -54,7 +68,7 @@ const TicketDetail = () => {
   });
 
   const { data: bookedTicket = {}, refetch: refetchBooked } = useQuery({
-    queryKey: ["bookedticket", ticket._id, user.email],
+    queryKey: ["bookedticket", ticket._id, user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/booked-tickets?TicketId=${ticket._id}&email=${user.email}`
@@ -62,6 +76,7 @@ const TicketDetail = () => {
       //console.log("from detail", res.data);
       return res.data;
     },
+    enabled: !!user && !!ticket._id, // Only run query when user is authenticated and ticket is loaded
   });
   const {
     title,
@@ -125,6 +140,12 @@ const TicketDetail = () => {
 
   const handelBook = (event) => {
     event.preventDefault();
+    
+    // Check if user is authenticated
+    if (!handleAuthCheck()) {
+      return;
+    }
+    
     if (ticket.quantity <= 0 && !isbooked) {
       return;
     }
@@ -260,7 +281,7 @@ const TicketDetail = () => {
                   state === "approved" && "hidden"
                 }`}
               >
-                {isbooked ? "cancel book" : "Book Now"}
+                {!user ? "Login to Book" : isbooked ? "cancel book" : "Book Now"}
                 <ChevronRightCircle className="w-5 h-5" />
               </button>
             )}
@@ -426,14 +447,20 @@ const TicketDetail = () => {
 
               {countdown !== "Departed" && (
                 <button
-                  onClick={() => setmodalActive(!modalActive)}
+                  onClick={() => {
+                    if (!user) {
+                      handleAuthCheck();
+                      return;
+                    }
+                    setmodalActive(!modalActive);
+                  }}
                   className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 ${
                     state === "accepted" && "hidden"
                   } ${state === "rejected" && "hidden"} ${
                     state === "paid" && "hidden"
                   }`}
                 >
-                  {isbooked ? "cancel book" : "Book Now"}
+                  {!user ? "Login to Book" : isbooked ? "cancel book" : "Book Now"}
                   <ChevronRightCircle className="w-5 h-5" />
                 </button>
               )}

@@ -37,22 +37,32 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="max-w-[1000px] p-5 mx-auto">
-      <div className="container mx-auto text-center px-4">
-        <h1 className="text-3xl font-bold flex  my-5">
-          <div className="w-[5px] mr-5 bg-blue-700"></div>Why choose us?
-          <div className="w-[5px] ml-5 bg-blue-700"></div>
-        </h1>
+    <section className="py-16 bg-white dark:bg-gray-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            Why Choose Us?
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Experience the difference with our commitment to excellence, reliability, and customer satisfaction.
+          </p>
+        </div>
 
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((feature, idx) => (
             <div
               key={idx}
-              className="feature-card p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+              className="group text-center p-6 bg-white dark:bg-gray-700 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md hover:border-blue-200 dark:hover:border-blue-600 transition-all duration-300 cursor-pointer"
             >
-              {feature.icon}
-              <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
+              <div className="mb-4 group-hover:scale-110 transition-transform duration-300">
+                {feature.icon}
+              </div>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
+                {feature.title}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                {feature.description}
+              </p>
             </div>
           ))}
         </div>

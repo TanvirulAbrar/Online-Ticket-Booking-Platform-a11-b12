@@ -5,37 +5,37 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../Shared/Loading/Loading";
 
 const LatestTickets = () => {
-  // const [tickets, settickets] = useState([]);
-  // useEffect(() => {
-  //   fetch("/tickets.json")
-  //     .then((res) => res.json())
-  //     .then((data) => settickets(data))
-  //     .catch((err) => console.log(err));
-  // }, []);
   const axiosSecure = useAxiosSecure();
   const { isLoading, data: tickets = [] } = useQuery({
     queryKey: ["tickets"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/tickets?state=approved`);
-      //console.log(res.data);
       return res.data;
     },
   });
+  
   if (isLoading) return <Loading />;
   if (!tickets) return <Loading />;
+  
   return (
-    <div className="max-w-[1000px] p-5 mx-auto">
-      <h1 className="text-3xl p-5 font-bold flex  my-5">
-        <div className="w-[5px] mr-5 bg-blue-700"></div> Latest
-        <div className="w-[5px] ml-5 bg-blue-700"></div>
-      </h1>
+    <section className="py-16 bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            Latest Tickets
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Browse our newest ticket offerings and find the perfect journey for your next adventure.
+          </p>
+        </div>
 
-      <div className="grid grid-cols-3 max-sm:grid-cols-1 max-md:grid-cols-2 gap-5">
-        {tickets.slice(0, 8).map((ticket, i) => {
-          return <TicketCard key={i + "ti"} ticket={ticket}></TicketCard>;
-        })}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {tickets.slice(0, 8).map((ticket, i) => {
+            return <TicketCard key={i + "ti"} ticket={ticket}></TicketCard>;
+          })}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
